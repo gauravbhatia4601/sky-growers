@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     images: [
       {
-        url: "/images/favicon.png",
+        url: "/images/farm.jpg",
         width: 1200,
         height: 630,
         alt: "Sky Growers farm in Christchurch, New Zealand",
