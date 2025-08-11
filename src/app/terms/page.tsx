@@ -18,12 +18,16 @@ export const metadata: Metadata = {
     description:
       "Ordering policies, payment terms, delivery and quality guarantees for Sky Growers, NZ.",
     url: "/terms",
+    images: [
+      { url: "/images/farm.jpg", width: 1200, height: 630, alt: "Sky Growers farm" },
+    ],
   },
   twitter: {
     card: "summary",
     title: "Terms & Conditions — Sky Growers NZ",
     description:
       "Policies for ordering farm-fresh vegetables from Sky Growers in Christchurch.",
+    images: ["/images/farm.jpg"],
   },
 };
 

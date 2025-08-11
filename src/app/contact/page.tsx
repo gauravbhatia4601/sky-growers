@@ -20,12 +20,16 @@ export const metadata: Metadata = {
     description:
       "Order premium farm-fresh vegetables from Sky Growers in Christchurch, New Zealand.",
     url: "/contact",
+    images: [
+      { url: "/images/farm.jpg", width: 1200, height: 630, alt: "Sky Growers farm" },
+    ],
   },
   twitter: {
     card: "summary",
     title: "Contact Sky Growers — Christchurch, NZ",
     description:
       "Wholesale and family orders for farm-fresh vegetables across Canterbury.",
+    images: ["/images/farm.jpg"],
   },
 };
 
