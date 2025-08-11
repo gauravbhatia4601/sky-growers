@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 import { Leaf, Phone, Calendar, MapPin } from "lucide-react";
 

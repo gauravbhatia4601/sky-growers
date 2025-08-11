@@ -1,65 +1,78 @@
-"use client";
-import { useState } from "react";
+import type { Metadata, Viewport } from "next";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { useToast } from "../../hooks/use-toast";
-import { Button } from "../../components/ui/button";
-import { Input } from "../../components/ui/input";
-import { Textarea } from "../../components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
-import { Phone, Calendar, Users } from "lucide-react";
+import { Phone, Users } from "lucide-react";
+import SeoJsonLd from "@/components/SeoJsonLd";
+import { getBaseUrl, siteConfig } from "@/lib/seo";
+import { KEYWORDS } from "@/seo/keywords";
+import ContactForm from "@/components/contact/ContactForm";
+
+export const metadata: Metadata = {
+  title: "Contact Sky Growers — Order Farm-Fresh Vegetables in Christchurch, NZ",
+  description:
+    "Get in touch with Sky Growers for wholesale and family orders. Organic, spray-free, farm-fresh vegetables with delivery across Canterbury, NZ.",
+  keywords: KEYWORDS,
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    type: "article",
+    locale: siteConfig.locale,
+    title: "Contact Sky Growers",
+    description:
+      "Order premium farm-fresh vegetables from Sky Growers in Christchurch, New Zealand.",
+    url: "/contact",
+  },
+  twitter: {
+    card: "summary",
+    title: "Contact Sky Growers — Christchurch, NZ",
+    description:
+      "Wholesale and family orders for farm-fresh vegetables across Canterbury.",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
 
 export default function Contact() {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    business: "",
-    orderType: "",
-    vegetables: "",
-    quantity: "",
-    deliveryDate: "",
-    message: ""
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Order Request Submitted!",
-      description: "Thank you for your interest. We'll contact you within 24 hours to confirm your order details.",
-    });
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      business: "",
-      orderType: "",
-      vegetables: "",
-      quantity: "",
-      deliveryDate: "",
-      message: ""
-    });
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSelectChange = (name: string, value: string) => {
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const currentSeason = new Date().getMonth() >= 3 && new Date().getMonth() <= 8 ? "Spring/Summer" : "Fall/Winter";
+  const baseUrl = getBaseUrl();
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      name: "Contact SKY GROWERS",
+      url: `${baseUrl}/contact`,
+      inLanguage: "en-NZ",
+      isPartOf: { "@type": "WebSite", name: siteConfig.name, url: baseUrl },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: siteConfig.name,
+      telephone: siteConfig.phone,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: siteConfig.city,
+        addressRegion: siteConfig.region,
+        addressCountry: siteConfig.country,
+      },
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: siteConfig.phone,
+          contactType: "customer service",
+          areaServed: "NZ",
+          availableLanguage: ["English"],
+        },
+      ],
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-white">
+      <SeoJsonLd data={jsonLd} />
       <Header />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-green-800 to-green-600 text-white py-16">
@@ -166,141 +179,7 @@ export default function Contact() {
           {/* Order Form */}
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-8">Order Inquiry Form</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Name *
-                  </label>
-                  <Input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email *
-                  </label>
-                  <Input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone *
-                  </label>
-                  <Input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Business/Organization
-                  </label>
-                  <Input
-                    type="text"
-                    name="business"
-                    value={formData.business}
-                    onChange={handleInputChange}
-                    className="w-full"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Order Type *
-                </label>
-                <Select 
-                  value={formData.orderType} 
-                  onValueChange={(value) => handleSelectChange("orderType", value)}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select order type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="bulk-wholesale">Bulk Wholesale (50+ lbs)</SelectItem>
-                    <SelectItem value="restaurant">Restaurant Supply</SelectItem>
-                    <SelectItem value="grocery">Grocery Store</SelectItem>
-                    <SelectItem value="individual">Individual/Family Order</SelectItem>
-                    <SelectItem value="catering">Catering/Events</SelectItem>
-                    <SelectItem value="csa">CSA Box Subscription</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Vegetables Requested *
-                </label>
-                <Textarea
-                  name="vegetables"
-                  value={formData.vegetables}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Please list specific vegetables you're interested in (e.g., 20 lbs tomatoes, 15 lbs carrots, 10 lbs lettuce mix)"
-                  className="w-full"
-                  rows={3}
-                />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Estimated Quantity
-                  </label>
-                  <Input
-                    type="text"
-                    name="quantity"
-                    value={formData.quantity}
-                    onChange={handleInputChange}
-                    placeholder="e.g., 100 lbs total, weekly order"
-                    className="w-full"
-                  />
-                </div>
-                {/* <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Preferred Delivery Date
-                  </label>
-                  <Input
-                    type="date"
-                    name="deliveryDate"
-                    value={formData.deliveryDate}
-                    onChange={handleInputChange}
-                    className="w-full"
-                  />
-                </div> */}
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Additional Message
-                </label>
-                <Textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  placeholder="Special requests, delivery instructions, or questions about our premium farm-fresh vegetables"
-                  className="w-full"
-                  rows={4}
-                />
-              </div>
-              <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white">
-                Submit Order Inquiry
-              </Button>
-            </form>
+            <ContactForm />
             <div className="mt-8 p-4 bg-blue-50 rounded-lg">
               <h3 className="font-semibold text-gray-900 mb-2">What Happens Next?</h3>
               <ul className="text-sm text-gray-600 space-y-1">
