@@ -1,8 +1,49 @@
-"use client";
+import type { Metadata, Viewport } from "next";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Link from "next/link";
 import { Users, Calendar, Phone } from "lucide-react";
+import SeoJsonLd from "@/components/SeoJsonLd";
+import { getBaseUrl, siteConfig } from "@/lib/seo";
+import { KEYWORDS } from "@/seo/keywords";
+
+export const metadata: Metadata = {
+  title: "Premium Farm-Fresh Vegetables in Christchurch, NZ",
+  description:
+    "Sky Growers offers organic, spray-free, farm-fresh vegetables in Christchurch, Canterbury, New Zealand. Wholesale, bulk, and direct farm-to-table delivery.",
+  keywords: KEYWORDS,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: siteConfig.locale,
+    title: "Sky Growers — Premium Farm-Fresh Vegetables",
+    description:
+      "Organic, spray-free, sustainably grown vegetables in Christchurch, New Zealand. Bulk wholesale and family orders.",
+    url: "/",
+    images: [
+      {
+        url: "/images/farm.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sky Growers farm in Christchurch, New Zealand",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sky Growers — Premium Farm-Fresh Vegetables",
+    description:
+      "Organic, spray-free, sustainably grown vegetables in Christchurch, New Zealand.",
+    images: ["/images/farm.jpg"],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
 
 const vegetables = [
   { name: "Fresh Coriander", image: "/images/coriander.jpg", season: "Year-round" },
@@ -33,8 +74,33 @@ const testimonials = [
 ];
 
 export default function Home() {
+  const baseUrl = getBaseUrl();
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: siteConfig.name,
+      url: baseUrl,
+      inLanguage: "en-NZ",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: siteConfig.name,
+      description: siteConfig.defaultDescription,
+      telephone: siteConfig.phone,
+      areaServed: "New Zealand",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: siteConfig.city,
+        addressRegion: siteConfig.region,
+        addressCountry: siteConfig.country,
+      },
+    },
+  ];
   return (
     <div className="min-h-screen bg-white">
+      <SeoJsonLd data={jsonLd} />
       <Header />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-green-800 to-green-600 text-white py-20">

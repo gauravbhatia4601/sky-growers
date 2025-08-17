@@ -1,7 +1,43 @@
-"use client";
+import type { Metadata, Viewport } from "next";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { Users, Calendar, Phone } from "lucide-react";
+import SeoJsonLd from "@/components/SeoJsonLd";
+import { getBaseUrl, siteConfig } from "@/lib/seo";
+import { KEYWORDS } from "@/seo/keywords";
+
+export const metadata: Metadata = {
+  title: "About Sky Growers — Family-Owned Regenerative Farm in Christchurch",
+  description:
+    "Learn about Sky Growers: a family-owned farm in Christchurch, NZ. Organic, spray-free, sustainable, and premium vegetables grown year-round.",
+  keywords: KEYWORDS,
+  alternates: { canonical: "/about" },
+  openGraph: {
+    type: "article",
+    locale: siteConfig.locale,
+    title: "About Sky Growers",
+    description:
+      "Family-owned regenerative farm in Christchurch, NZ producing premium, organic-style vegetables.",
+    url: "/about",
+    images: [
+      { url: "/images/farm.jpg", width: 1200, height: 630, alt: "Sky Growers farm" },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Sky Growers",
+    description:
+      "Family-owned regenerative farm in Christchurch, NZ producing premium vegetables.",
+    images: ["/images/farm.jpg"],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
 
 const familyMembers = [
   {
@@ -34,8 +70,33 @@ const certifications = [
 ];
 
 export default function About() {
+  const baseUrl = getBaseUrl();
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      name: "About SKY GROWERS",
+      url: `${baseUrl}/about`,
+      inLanguage: "en-NZ",
+      isPartOf: { "@type": "WebSite", name: siteConfig.name, url: baseUrl },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: siteConfig.name,
+      description: siteConfig.defaultDescription,
+      telephone: siteConfig.phone,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: siteConfig.city,
+        addressRegion: siteConfig.region,
+        addressCountry: siteConfig.country,
+      },
+    },
+  ];
   return (
     <div className="min-h-screen bg-white">
+      <SeoJsonLd data={jsonLd} />
       <Header />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-green-800 to-green-600 text-white py-16">

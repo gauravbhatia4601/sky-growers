@@ -1,10 +1,58 @@
-"use client";
+import type { Metadata, Viewport } from "next";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import SeoJsonLd from "@/components/SeoJsonLd";
+import { getBaseUrl, siteConfig } from "@/lib/seo";
+import { KEYWORDS } from "@/seo/keywords";
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions — Sky Growers New Zealand",
+  description:
+    "Terms and conditions for ordering premium farm-fresh vegetables from Sky Growers in Christchurch, New Zealand.",
+  keywords: KEYWORDS,
+  alternates: { canonical: "/terms" },
+  openGraph: {
+    type: "article",
+    locale: siteConfig.locale,
+    title: "Terms & Conditions",
+    description:
+      "Ordering policies, payment terms, delivery and quality guarantees for Sky Growers, NZ.",
+    url: "/terms",
+    images: [
+      { url: "/images/farm.jpg", width: 1200, height: 630, alt: "Sky Growers farm" },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Terms & Conditions — Sky Growers NZ",
+    description:
+      "Policies for ordering farm-fresh vegetables from Sky Growers in Christchurch.",
+    images: ["/images/farm.jpg"],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
 
 export default function Terms() {
+  const baseUrl = getBaseUrl();
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: "Terms & Conditions",
+      url: `${baseUrl}/terms`,
+      inLanguage: "en-NZ",
+      isPartOf: { "@type": "WebSite", name: siteConfig.name, url: baseUrl },
+    },
+  ];
   return (
     <div className="min-h-screen bg-white">
+      <SeoJsonLd data={jsonLd} />
       <Header />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-green-800 to-green-600 text-white py-16">
