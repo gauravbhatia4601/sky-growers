@@ -51,7 +51,7 @@ const vegetables = [
   { name: "Fresh Beetroot", image: "/images/beetroot.jpg", season: "Year-round" },
   { name: "Crisp Radish", image: "/images/radish.jpg", season: "Year-round" },
   { name: "Cucumber", image: "/images/cucumber.jpg", season: "Year-round" },
-  { name: "Onion Greens", image: "/images/onion-greens.jpg", season: "Year-round" },
+  { name: "Spring Onion", image: "/images/onion-greens.jpg", season: "Year-round" },
   { name: "Butter Nut", image: "/images/butter-nut.jpg", season: "Year-round" },
 ];
 
