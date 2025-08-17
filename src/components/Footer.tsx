@@ -69,7 +69,6 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Our Services</h4>
             <ul className="space-y-2 text-gray-300">
               <li>Bulk Wholesale Supply</li>
-              <li>Farm-to-Table Delivery</li>
               <li>Seasonal Produce Orders</li>
             </ul>
           </div>

@@ -134,7 +134,7 @@ export default function About() {
               className="rounded-lg shadow-lg w-full h-64 object-cover"
             />
             <img
-              src="/images/beetroot.jpg"
+              src="/images/beetroot1.jpg"
               alt="Fresh beetroot"
               className="rounded-lg shadow-lg w-full h-64 object-cover"
             />

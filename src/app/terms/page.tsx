@@ -18,7 +18,7 @@ export default function Terms() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Terms & Conditions</h1>
           <p className="text-xl max-w-3xl mx-auto">
-          Our business policies and terms for ordering premium farm-fresh vegetables from Green Valley Farm
+          Our business policies and terms for ordering premium farm-fresh vegetables from Sky Growers
           </p>
         </div>
       </section>
@@ -27,7 +27,7 @@ export default function Terms() {
           {/* Order Policies */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Order Policies and Minimum Quantities</h2>
-            <div className="bg-green-50 p-6 rounded-lg mb-6">
+            {/* <div className="bg-green-50 p-6 rounded-lg mb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Minimum Order Requirements</h3>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>Bulk Wholesale Orders:</strong> 50 lbs minimum total weight</li>
@@ -35,25 +35,24 @@ export default function Terms() {
                 <li><strong>Individual/Family Orders:</strong> $50 minimum order value</li>
                 <li><strong>Delivery Orders:</strong> $75 minimum for delivery service</li>
               </ul>
-            </div>
+            </div> */}
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Order Processing</h3>
             <ul className="space-y-2 text-gray-700 mb-6">
               <li>• All orders must be placed at least 48 hours in advance</li>
               <li>• Bulk orders (100+ lbs) require 1 week advance notice</li>
               <li>• Order confirmation will be provided within 24 hours</li>
               <li>• Changes to confirmed orders must be made 24 hours before delivery</li>
-              <li>• Custom harvesting requests require 2-3 days notice</li>
             </ul>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Product Availability</h3>
+            {/* <h3 className="text-xl font-semibold text-gray-900 mb-4">Product Availability</h3>
             <p className="text-gray-700 mb-4">
-              Green Valley Farm specializes in locally-grown seasonal produce. Availability varies based on:
+            Sky Growers Farm specializes in locally-grown seasonal produce. Availability varies based on:
             </p>
             <ul className="space-y-2 text-gray-700">
               <li>• Seasonal growing cycles and harvest schedules</li>
               <li>• Weather conditions and crop maturity</li>
               <li>• Previous order commitments and inventory levels</li>
               <li>• Sustainable agriculture practices and crop rotation</li>
-            </ul>
+            </ul> */}
           </section>
           {/* Payment Terms */}
           <section className="mb-12">
@@ -62,15 +61,13 @@ export default function Terms() {
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Accepted Payment Methods</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">Individual Orders:</h4>
+                  {/* <h4 className="font-medium text-gray-900 mb-2">Individual Orders:</h4> */}
                   <ul className="text-gray-700 space-y-1">
                     <li>• Cash on delivery</li>
-                    <li>• Check (with valid ID)</li>
-                    <li>• Credit/Debit cards</li>
-                    <li>• Venmo/PayPal</li>
+                    <li>• Internet Banking</li>
                   </ul>
                 </div>
-                <div>
+                {/* <div>
                   <h4 className="font-medium text-gray-900 mb-2">Commercial/Bulk Orders:</h4>
                   <ul className="text-gray-700 space-y-1">
                     <li>• Net 30 terms (approved accounts)</li>
@@ -78,23 +75,19 @@ export default function Terms() {
                     <li>• Commercial credit cards</li>
                     <li>• Wire transfer (large orders)</li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Payment Terms</h3>
             <ul className="space-y-2 text-gray-700 mb-6">
-              <li>• Individual orders: Payment due upon delivery or pickup</li>
-              <li>• New commercial accounts: Payment due on delivery (COD)</li>
-              <li>• Established accounts: Net 30 payment terms available</li>
-              <li>• Credit applications required for Net 30 terms</li>
-              <li>• Late payments subject to 1.5% monthly service charge</li>
-              <li>• Returned checks incur $35 processing fee</li>
+              <li>• Payment is due on a weekly basis</li>
+              <li>• For bulk orders, the payment structure can be altered after discussion</li>
             </ul>
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Pricing</h3>
             <p className="text-gray-700">
               Pricing for our premium farm-fresh vegetables varies based on seasonal availability, 
               order quantity, and current market conditions. Volume discounts available for bulk 
-              wholesale orders. Custom quotes provided for large commercial accounts.
+              wholesale orders.
             </p>
           </section>
           {/* Delivery and Pickup */}
@@ -106,12 +99,11 @@ export default function Terms() {
                 <ul className="space-y-2 text-gray-700">
                   <li><strong>Local Delivery (Free):</strong> Orders over $75</li>
                   <li><strong>Extended Area:</strong> $25 delivery fee</li>
-                  <li><strong>Delivery Days:</strong> Tuesday, Thursday, Saturday</li>
-                  <li><strong>Time Windows:</strong> 8AM-12PM or 1PM-5PM</li>
-                  <li><strong>Same-Day Delivery:</strong> Available for emergency orders (+$50)</li>
+                  <li><strong>Delivery Days:</strong> Monday - Friday</li>
+                  <li><strong>Time Windows:</strong> 9AM - 5PM</li>
                 </ul>
               </div>
-              <div className="bg-orange-50 p-6 rounded-lg">
+              {/* <div className="bg-orange-50 p-6 rounded-lg">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Farm Pickup</h3>
                 <ul className="space-y-2 text-gray-700">
                   <li><strong>Pickup Hours:</strong> Mon-Sat 8AM-6PM</li>
@@ -120,20 +112,19 @@ export default function Terms() {
                   <li><strong>Advance Notice:</strong> 2 hours minimum</li>
                   <li><strong>Farm Tours:</strong> Available during pickup</li>
                 </ul>
-              </div>
+              </div> */}
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Delivery Area Coverage</h3>
             <p className="text-gray-700 mb-4">
-              Our direct-from-farm delivery service covers the Central Valley region with regular 
-              routes to major cities and custom delivery options for large orders.
+              Our direct-from-farm delivery service covers the Christchurch city.
             </p>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Special Delivery Requirements</h3>
+            {/* <h3 className="text-xl font-semibold text-gray-900 mb-4">Special Delivery Requirements</h3>
             <ul className="space-y-2 text-gray-700">
               <li>• Refrigerated transport available for temperature-sensitive orders</li>
               <li>• Loading dock deliveries for commercial accounts</li>
               <li>• Special handling for delicate vegetables</li>
               <li>• Delivery confirmation and tracking available</li>
-            </ul>
+            </ul> */}
           </section>
           {/* Quality Guarantee */}
           <section className="mb-12">
@@ -141,7 +132,7 @@ export default function Terms() {
             <div className="bg-green-50 p-6 rounded-lg mb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Our Quality Promise</h3>
               <p className="text-gray-700">
-                Green Valley Farm guarantees that all vegetables are harvested at peak freshness using 
+                Sky Growers guarantees that all vegetables are harvested at peak freshness using 
                 sustainable agriculture practices and pesticide-free growing methods. We stand behind 
                 the quality of our premium farm-fresh vegetables with a comprehensive satisfaction guarantee.
               </p>
@@ -152,7 +143,6 @@ export default function Terms() {
               <li>• Photo documentation required for quality claims</li>
               <li>• Full refund or replacement for verified quality issues</li>
               <li>• No returns accepted for normal aging or customer handling issues</li>
-              <li>• Seasonal variations in appearance are normal and not grounds for return</li>
             </ul>
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Quality Standards</h3>
             <ul className="space-y-2 text-gray-700">
@@ -171,7 +161,7 @@ export default function Terms() {
               vegetable availability is naturally dependent on growing seasons, weather conditions, 
               and sustainable farming practices.
             </p>
-            <div className="bg-amber-50 p-6 rounded-lg mb-6">
+            {/* <div className="bg-amber-50 p-6 rounded-lg mb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Seasonal Variations</h3>
               <p className="text-gray-700 mb-4">
                 Our crop production follows natural growing cycles to ensure optimal flavor and nutrition:
@@ -182,7 +172,7 @@ export default function Terms() {
                 <li><strong>Fall (September-November):</strong> Root vegetables, storage crops, winter prep</li>
                 <li><strong>Winter (December-February):</strong> Cold-hardy vegetables, stored produce</li>
               </ul>
-            </div>
+            </div> */}
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Weather and Growing Conditions</h3>
             <ul className="space-y-2 text-gray-700 mb-6">
               <li>• Extreme weather may affect harvest timing and availability</li>
@@ -203,7 +193,7 @@ export default function Terms() {
             <div className="bg-red-50 p-6 rounded-lg mb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Important Legal Information</h3>
               <p className="text-gray-700">
-                Please read these liability terms carefully. By ordering from Green Valley Farm, 
+                Please read these liability terms carefully. By ordering from Sky Growers, 
                 you acknowledge and agree to these terms and conditions.
               </p>
             </div>
@@ -221,7 +211,7 @@ export default function Terms() {
               <li>• Undeliverable orders due to incorrect address subject to redelivery fees</li>
               <li>• Customer must inspect delivery at time of receipt</li>
             </ul>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Insurance Coverage</h3>
+            {/* <h3 className="text-xl font-semibold text-gray-900 mb-4">Insurance Coverage</h3>
             <p className="text-gray-700 mb-4">
               Green Valley Farm maintains comprehensive insurance coverage including:
             </p>
@@ -230,10 +220,10 @@ export default function Terms() {
               <li>• Product liability coverage for all vegetables sold</li>
               <li>• Commercial vehicle insurance for delivery operations</li>
               <li>• Property insurance for farm buildings and equipment</li>
-            </ul>
+            </ul> */}
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Limitation of Liability</h3>
             <p className="text-gray-700">
-              Green Valley Farm's liability for any claim related to our products or services 
+              Sky Growers liability for any claim related to our products or services 
               shall not exceed the purchase price of the specific order in question. We are not 
               responsible for consequential, incidental, or punitive damages.
             </p>
@@ -247,14 +237,11 @@ export default function Terms() {
                 any aspect of our premium farm-fresh vegetables and services, please contact us:
               </p>
               <div className="space-y-2 text-gray-700">
-                <p><strong>Phone:</strong> (555) 123-4567</p>
-                <p><strong>Email:</strong> info@greenvalleyfarm.com</p>
-                <p><strong>Address:</strong> 1234 Green Valley Road, Farmington, CA 95123</p>
-                <p><strong>Business Hours:</strong> Monday-Saturday 8AM-6PM, Sunday 9AM-4PM</p>
+                <p><strong>Phone:</strong> +64 27 730 0400</p>
+                <p><strong>Email:</strong> skygrowers@gmail.com</p>
+                <p><strong>Address:</strong> Christchurch, Canterbury, New Zealand</p>
+                <p><strong>Business Hours:</strong> Monday-Friday 9AM-5PM</p>
               </div>
-              <p className="text-gray-700 mt-4">
-                <strong>Last Updated:</strong> January 2024
-              </p>
               <p className="text-gray-700">
                 These terms and conditions are subject to change. Customers will be notified 
                 of any significant changes to our policies.

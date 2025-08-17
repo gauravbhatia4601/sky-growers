@@ -6,9 +6,12 @@ import { Users, Calendar, Phone } from "lucide-react";
 
 const vegetables = [
   { name: "Fresh Coriander", image: "/images/coriander.jpg", season: "Year-round" },
-  { name: "Regenerative Spinach", image: "/images/spinach1.jpg", season: "Year-round" },
+  { name: "Regenerative Spinach", image: "/images/spinach.jpg", season: "Year-round" },
   { name: "Fresh Beetroot", image: "/images/beetroot.jpg", season: "Year-round" },
   { name: "Crisp Radish", image: "/images/radish.jpg", season: "Year-round" },
+  { name: "Cucumber", image: "/images/cucumber.jpg", season: "Year-round" },
+  { name: "Onion Greens", image: "/images/onion-greens.jpg", season: "Year-round" },
+  { name: "Butter Nut", image: "/images/butter-nut.jpg", season: "Year-round" },
 ];
 
 const testimonials = [
@@ -162,7 +165,7 @@ export default function Home() {
         </div>
       </section>
       {/* Customer Testimonials */}
-      <section className="py-16">
+      {/* <section className="py-16 d-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">What Our Customers Say</h2>
@@ -182,7 +185,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
       {/* From Our Family Farm */}
       {/* <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
