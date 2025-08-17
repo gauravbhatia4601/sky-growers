@@ -10,7 +10,7 @@ import { KEYWORDS } from "@/seo/keywords";
 export const metadata: Metadata = {
   title: "Premium Farm-Fresh Vegetables in Christchurch, NZ",
   description:
-    "Sky Growers offers organic, spray-free, farm-fresh vegetables in Christchurch, Canterbury, New Zealand. Wholesale, bulk, and direct farm-to-table delivery.",
+    "Sky Growers offers farm-fresh vegetables in Christchurch, Canterbury, New Zealand. Wholesale, bulk, and direct farm-to-table delivery.",
   keywords: KEYWORDS,
   alternates: { canonical: "/" },
   openGraph: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     title: "Sky Growers — Premium Farm-Fresh Vegetables",
     description:
-      "Organic, spray-free, sustainably grown vegetables in Christchurch, New Zealand. Bulk wholesale and family orders.",
+      "Sustainably grown vegetables in Christchurch, New Zealand. Bulk wholesale and family orders.",
     url: "/",
     images: [
       {
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sky Growers — Premium Farm-Fresh Vegetables",
     description:
-      "Organic, spray-free, sustainably grown vegetables in Christchurch, New Zealand.",
+      "Sustainably grown vegetables in Christchurch, New Zealand.",
     images: ["/images/farm.jpg"],
   },
 };
@@ -47,7 +47,7 @@ export const viewport: Viewport = {
 
 const vegetables = [
   { name: "Fresh Coriander", image: "/images/coriander.jpg", season: "Year-round" },
-  { name: "Regenerative Spinach", image: "/images/spinach.jpg", season: "Year-round" },
+  { name: "Pumpkin", image: "/images/spinach.jpg", season: "Year-round" },
   { name: "Fresh Beetroot", image: "/images/beetroot.jpg", season: "Year-round" },
   { name: "Crisp Radish", image: "/images/radish.jpg", season: "Year-round" },
   { name: "Cucumber", image: "/images/cucumber.jpg", season: "Year-round" },

@@ -9,7 +9,7 @@ import { KEYWORDS } from "@/seo/keywords";
 export const metadata: Metadata = {
   title: "About Sky Growers — Family-Owned Regenerative Farm in Christchurch",
   description:
-    "Learn about Sky Growers: a family-owned farm in Christchurch, NZ. Organic, spray-free, sustainable, and premium vegetables grown year-round.",
+    "Learn about Sky Growers: a family-owned farm in Christchurch, NZ. Sustainable, and premium vegetables grown year-round.",
   keywords: KEYWORDS,
   alternates: { canonical: "/about" },
   openGraph: {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     title: "About Sky Growers",
     description:
-      "Family-owned regenerative farm in Christchurch, NZ producing premium, organic-style vegetables.",
+      "Family-owned regenerative farm in Christchurch, NZ producing premium vegetables.",
     url: "/about",
     images: [
       { url: "/images/farm.jpg", width: 1200, height: 630, alt: "Sky Growers farm" },

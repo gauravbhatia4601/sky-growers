@@ -10,7 +10,7 @@ import ContactForm from "@/components/contact/ContactForm";
 export const metadata: Metadata = {
   title: "Contact Sky Growers — Order Farm-Fresh Vegetables in Christchurch, NZ",
   description:
-    "Get in touch with Sky Growers for wholesale and family orders. Organic, spray-free, farm-fresh vegetables with delivery across Canterbury, NZ.",
+    "Get in touch with Sky Growers for wholesale and family orders. Farm-fresh vegetables with delivery across Canterbury, NZ.",
   keywords: KEYWORDS,
   alternates: { canonical: "/contact" },
   openGraph: {

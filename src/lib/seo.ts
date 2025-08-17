@@ -11,7 +11,7 @@ export const siteConfig = {
   name: "SKY GROWERS",
   tagline: "Premium Farm-Fresh Vegetables",
   defaultDescription:
-    "Premium farm-fresh vegetables in Christchurch, New Zealand. Organic, sustainable, pesticide-free, and year-round supply.",
+    "Premium farm-fresh vegetables in Christchurch, New Zealand. Sustainable, and year-round supply.",
   locale: "en_NZ",
   phone: "+64 27 730 0400",
   city: "Christchurch",

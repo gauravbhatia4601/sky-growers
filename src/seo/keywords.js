@@ -30,11 +30,6 @@ const vegetables = [
 ];
 
 const modifiers = [
-  "organic",
-  "certified organic",
-  "spray-free",
-  "pesticide-free",
-  "chemical-free",
   "natural",
   "farm fresh",
   "fresh",
@@ -104,7 +99,6 @@ const base = [
   "Sky Growers New Zealand",
   "Sky Growers Christchurch",
   "premium vegetables NZ",
-  "organic vegetables NZ",
   "fresh vegetables NZ",
   "farm fresh vegetables Christchurch",
   "local farm Christchurch",
