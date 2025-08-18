@@ -8,7 +8,7 @@ const vegetables = [
   "coriander",
   "cilantro",
   "spinach",
-  "beetroot",
+  // "beetroot",
   "radish",
   "lettuce",
   "kale",
