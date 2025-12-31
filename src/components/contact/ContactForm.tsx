@@ -21,24 +21,69 @@ export default function ContactForm() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Order Request Submitted!",
-      description:
-        "Thank you for your interest. We'll contact you within 24 hours to confirm your order details.",
-    });
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      business: "",
-      orderType: "",
-      vegetables: "",
-      quantity: "",
-      deliveryDate: "",
-      message: "",
-    });
+    setIsSubmitting(true);
+
+    try {
+      // For now, create a placeholder order item since the form doesn't have product selection
+      // In a full implementation, you'd want to add product selection to the form
+      const orderData = {
+        customerName: formData.name,
+        customerEmail: formData.email,
+        customerPhone: formData.phone,
+        businessName: formData.business || undefined,
+        orderType: formData.orderType as any,
+        items: [
+          {
+            productId: '000000000000000000000000', // Placeholder - will need to be handled on backend
+            quantity: 1,
+          },
+        ],
+        notes: `Vegetables requested: ${formData.vegetables}\nQuantity: ${formData.quantity}\n${formData.message || ''}`,
+        deliveryDate: formData.deliveryDate || undefined,
+      };
+
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to submit order');
+      }
+
+      toast({
+        title: "Order Request Submitted!",
+        description:
+          "Thank you for your interest. We'll contact you within 24 hours to confirm your order details.",
+      });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        business: "",
+        orderType: "",
+        vegetables: "",
+        quantity: "",
+        deliveryDate: "",
+        message: "",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to submit order. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (
@@ -195,8 +240,12 @@ export default function ContactForm() {
         />
       </div>
 
-      <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white">
-        Submit Order Inquiry
+      <Button 
+        type="submit" 
+        disabled={isSubmitting}
+        className="w-full bg-green-600 hover:bg-green-700 text-white"
+      >
+        {isSubmitting ? "Submitting..." : "Submit Order Inquiry"}
       </Button>
     </form>
   );
