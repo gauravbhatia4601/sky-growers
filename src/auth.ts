@@ -7,6 +7,8 @@ import bcrypt from 'bcryptjs';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
     ...authConfig,
+    // Explicitly set trustHost for production
+    trustHost: true,
     providers: [
         Credentials({
             credentials: {

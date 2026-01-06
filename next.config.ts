@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
   },
   // Enable standalone output for Docker deployments
   output: 'standalone',
+  // Trust host for NextAuth in production
+  experimental: {
+    serverActions: {
+      allowedOrigins: process.env.NEXTAUTH_URL 
+        ? [new URL(process.env.NEXTAUTH_URL).hostname]
+        : ['localhost'],
+    },
+  },
   // Optimize images
   images: {
     formats: ['image/avif', 'image/webp'],
