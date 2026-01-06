@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false,
   },
   // Enable standalone output for Docker deployments
-  output: process.env.DOCKER_BUILD === 'true' ? 'standalone' : undefined,
+  output: 'standalone',
   // Optimize images
   images: {
     formats: ['image/avif', 'image/webp'],
