@@ -3,13 +3,22 @@
  * Run with: npx tsx scripts/seed-admin.ts
  */
 
+import dotenv from 'dotenv';
+import path from 'path';
+
+// Load environment variables from .env.local in the root directory
+const envPath = path.resolve(process.cwd(), '.env.local');
+console.log('Loading env from:', envPath);
+dotenv.config({ path: envPath });
+
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-import User from '../src/lib/db/models/User';
-import connectDB from '../src/lib/db/connect';
 
 async function seedAdmin() {
   try {
+    const { default: connectDB } = await import('../src/lib/db/connect');
+    const { default: User } = await import('../src/lib/db/models/User');
+
     await connectDB();
     console.log('Connected to MongoDB');
 

@@ -66,7 +66,7 @@ export default function AnalyticsDashboard() {
           <select
             value={period}
             onChange={(e) => setPeriod(e.target.value as 'daily' | 'weekly' | 'monthly')}
-            className="px-3 py-2 border border-gray-300 rounded-md"
+            className="px-3 py-2 border border-gray-300 rounded-md text-gray-900"
           >
             <option value="daily">Last 30 Days</option>
             <option value="weekly">Last 12 Weeks</option>

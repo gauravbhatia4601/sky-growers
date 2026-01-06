@@ -6,6 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Plus, X } from "lucide-react";
+
+interface VegetableItem {
+  name: string;
+  quantity: string;
+  unit: string;
+}
 
 export default function ContactForm() {
   const { toast } = useToast();
@@ -15,35 +22,70 @@ export default function ContactForm() {
     phone: "",
     business: "",
     orderType: "",
-    vegetables: "",
-    quantity: "",
     deliveryDate: "",
     message: "",
   });
 
+  const [vegetables, setVegetables] = useState<VegetableItem[]>([
+    { name: "", quantity: "", unit: "lbs" },
+  ]);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const addVegetableField = () => {
+    setVegetables([...vegetables, { name: "", quantity: "", unit: "lbs" }]);
+  };
+
+  const removeVegetableField = (index: number) => {
+    if (vegetables.length > 1) {
+      setVegetables(vegetables.filter((_, i) => i !== index));
+    }
+  };
+
+  const updateVegetable = (index: number, field: keyof VegetableItem, value: string) => {
+    const updated = [...vegetables];
+    updated[index] = { ...updated[index], [field]: value };
+    setVegetables(updated);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // For now, create a placeholder order item since the form doesn't have product selection
-      // In a full implementation, you'd want to add product selection to the form
+      // Validate at least one vegetable is filled
+      const validVegetables = vegetables.filter(
+        (v) => v.name.trim() && v.quantity.trim()
+      );
+
+      if (validVegetables.length === 0) {
+        toast({
+          title: "Validation Error",
+          description: "Please add at least one vegetable with name and quantity",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Create order items from vegetables
+      const items = validVegetables.map((veg) => ({
+        productName: veg.name.trim(),
+        quantity: parseFloat(veg.quantity) || 0,
+        unit: veg.unit,
+      }));
+
       const orderData = {
         customerName: formData.name,
         customerEmail: formData.email,
         customerPhone: formData.phone,
         businessName: formData.business || undefined,
         orderType: formData.orderType as any,
-        items: [
-          {
-            productId: '000000000000000000000000', // Placeholder - will need to be handled on backend
-            quantity: 1,
-          },
-        ],
-        notes: `Vegetables requested: ${formData.vegetables}\nQuantity: ${formData.quantity}\n${formData.message || ''}`,
+        items: items,
+        notes: formData.message.trim() || undefined,
         deliveryDate: formData.deliveryDate || undefined,
+        // Honeypot field (should be empty - bots will fill it)
+        website: '',
       };
 
       const response = await fetch('/api/orders', {
@@ -70,11 +112,10 @@ export default function ContactForm() {
         phone: "",
         business: "",
         orderType: "",
-        vegetables: "",
-        quantity: "",
         deliveryDate: "",
         message: "",
       });
+      setVegetables([{ name: "", quantity: "", unit: "lbs" }]);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -104,6 +145,15 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Honeypot field for bot detection - hidden from users */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        style={{ position: 'absolute', left: '-9999px' }}
+        aria-hidden="true"
+      />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -187,43 +237,73 @@ export default function ContactForm() {
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Vegetables Requested *
         </label>
-        <Textarea
-          name="vegetables"
-          value={formData.vegetables}
-          onChange={handleInputChange}
-          required
-          placeholder="Please list specific vegetables you're interested in (e.g., 20 lbs tomatoes, 15 lbs carrots, 10 lbs lettuce mix)"
-          className="w-full"
-          rows={3}
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Estimated Quantity
-          </label>
-          <Input
-            type="text"
-            name="quantity"
-            value={formData.quantity}
-            onChange={handleInputChange}
-            placeholder="e.g., 100 lbs total, weekly order"
+        <div className="space-y-3">
+          {vegetables.map((veg, index) => (
+            <div key={index} className="grid grid-cols-12 gap-2 items-end">
+              <div className="col-span-5">
+                <Input
+                  type="text"
+                  placeholder="Vegetable name"
+                  value={veg.name}
+                  onChange={(e) => updateVegetable(index, "name", e.target.value)}
+                  required={index === 0}
+                  className="w-full"
+                />
+              </div>
+              <div className="col-span-3">
+                <Input
+                  type="number"
+                  placeholder="Quantity"
+                  value={veg.quantity}
+                  onChange={(e) => updateVegetable(index, "quantity", e.target.value)}
+                  required={index === 0}
+                  min="0"
+                  step="0.1"
+                  className="w-full"
+                />
+              </div>
+              <div className="col-span-3">
+                <Select
+                  value={veg.unit}
+                  onValueChange={(value) => updateVegetable(index, "unit", value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="lbs">lbs</SelectItem>
+                    <SelectItem value="kg">kg</SelectItem>
+                    <SelectItem value="piece">piece</SelectItem>
+                    <SelectItem value="bunch">bunch</SelectItem>
+                    <SelectItem value="box">box</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="col-span-1">
+                {vegetables.length > 1 && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="icon"
+                    onClick={() => removeVegetableField(index)}
+                    className="w-full"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                )}
+              </div>
+            </div>
+          ))}
+          <Button
+            type="button"
+            variant="outline"
+            onClick={addVegetableField}
             className="w-full"
-          />
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            Add Another Vegetable
+          </Button>
         </div>
-        {/* <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Preferred Delivery Date
-          </label>
-          <Input
-            type="date"
-            name="deliveryDate"
-            value={formData.deliveryDate}
-            onChange={handleInputChange}
-            className="w-full"
-          />
-        </div> */}
       </div>
 
       <div>

@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify product exists
+    // Verify product exists (allow deleted products for inventory management)
     const product = await Product.findById(productId);
     if (!product) {
       return NextResponse.json(
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Validation failed', details: error.errors },
+        { error: 'Validation failed', details: error.issues },
         { status: 400 }
       );
     }

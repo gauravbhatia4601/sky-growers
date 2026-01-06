@@ -4,6 +4,7 @@ import Order from '@/lib/db/models/Order';
 import { requireAuth } from '@/lib/auth/middleware';
 import { isValidObjectId } from '@/lib/utils/security';
 import { handleOrderStatusChange } from '@/lib/utils/orders';
+import { updateStatsOnStatusChange } from '@/lib/utils/stats';
 import { z } from 'zod';
 
 const updateStatusSchema = z.object({
@@ -42,13 +43,16 @@ export async function PATCH(
       await handleOrderStatusChange(order, oldStatus, status);
       order.status = status;
       await order.save();
+      
+      // Update stats when order status changes
+      await updateStatsOnStatusChange(oldStatus, status, order.totalAmount);
     }
 
     return NextResponse.json(order.toObject());
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Validation failed', details: error.errors },
+        { error: 'Validation failed', details: error.issues },
         { status: 400 }
       );
     }

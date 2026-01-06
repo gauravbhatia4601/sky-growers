@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { AlertTriangle, Edit } from 'lucide-react';
+import { AlertTriangle, Edit, Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import Link from 'next/link';
 
 interface InventoryItem {
   _id: string;
@@ -75,6 +76,12 @@ export default function InventoryPage() {
             <span className="ml-2 text-sm text-gray-700">Show low stock only</span>
           </label>
         </div>
+        <Link href="/admin/inventory/new">
+          <Button className="text-gray-900 border-1 hover:bg-gray-900 hover:text-white">
+            <Plus className="h-4 w-4 mr-2" />
+            Add Inventory
+          </Button>
+        </Link>
       </div>
 
       {loading ? (
@@ -113,55 +120,57 @@ export default function InventoryPage() {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {inventory.map((item) => (
-                <tr key={item._id} className={isLowStock(item) ? 'bg-red-50' : ''}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      {item.productId.imageUrl && (
-                        <img
-                          className="h-10 w-10 rounded object-cover mr-3"
-                          src={item.productId.imageUrl}
-                          alt={item.productId.name}
-                        />
-                      )}
-                      <div>
-                        <div className="text-sm font-medium text-gray-900">
-                          {item.productId.name}
+                    <tr key={item._id} className={isLowStock(item) ? 'bg-red-50' : ''}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          {item.productId.imageUrl && (
+                            <img
+                              className="h-10 w-10 rounded object-cover mr-3"
+                              src={item.productId.imageUrl}
+                              alt={item.productId.name}
+                            />
+                          )}
+                          <div>
+                            <div className="text-sm font-medium text-gray-900">
+                              {item.productId.name}
+                            </div>
+                            <div className="text-sm text-gray-500">{item.productId.category}</div>
+                          </div>
                         </div>
-                        <div className="text-sm text-gray-500">{item.productId.category}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {item.quantity} {item.productId.unit}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {item.reservedQuantity} {item.productId.unit}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {item.availableQuantity} {item.productId.unit}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {item.lowStockThreshold} {item.productId.unit}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {isLowStock(item) ? (
-                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 flex items-center">
-                        <AlertTriangle className="h-3 w-3 mr-1" />
-                        Low Stock
-                      </span>
-                    ) : (
-                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        In Stock
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <Button variant="outline" size="sm">
-                      <Edit className="h-4 w-4 mr-1" />
-                      Edit
-                    </Button>
-                  </td>
-                </tr>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {item.quantity} {item.productId.unit}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {item.reservedQuantity} {item.productId.unit}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {item.availableQuantity} {item.productId.unit}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {item.lowStockThreshold} {item.productId.unit}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {isLowStock(item) ? (
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 flex items-center">
+                            <AlertTriangle className="h-3 w-3 mr-1" />
+                            Low Stock
+                          </span>
+                        ) : (
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            In Stock
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <Link href={`/admin/inventory/${item._id}`}>
+                          <Button variant="outline" size="sm">
+                            <Edit className="h-4 w-4 mr-1" />
+                            Edit
+                          </Button>
+                        </Link>
+                      </td>
+                    </tr>
               ))}
             </tbody>
           </table>

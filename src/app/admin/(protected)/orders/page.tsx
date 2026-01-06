@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Eye, Search } from 'lucide-react';
+import { Eye, Search, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { OrderStatus } from '@/lib/db/models/Order';
+import { Pagination } from '@/components/ui/pagination';
 
 interface Order {
   _id: string;
@@ -42,23 +43,45 @@ export default function OrdersPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [startDate, setStartDate] = useState<string>('');
+  const [endDate, setEndDate] = useState<string>('');
+  const [page, setPage] = useState(1);
+  const [limit] = useState(20);
+  const [totalPages, setTotalPages] = useState(1);
+  const [total, setTotal] = useState(0);
   const { toast } = useToast();
 
   useEffect(() => {
+    setPage(1);
+  }, [statusFilter, startDate, endDate, search]);
+
+  useEffect(() => {
     fetchOrders();
-  }, [statusFilter]);
+  }, [page, statusFilter, startDate, endDate, search]);
 
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const url =
-        statusFilter === 'all'
-          ? '/api/admin/orders'
-          : `/api/admin/orders?status=${statusFilter}`;
+      let url = `/api/admin/orders?page=${page}&limit=${limit}`;
+      if (statusFilter !== 'all') {
+        url += `&status=${statusFilter}`;
+      }
+      if (search) {
+        url += `&search=${encodeURIComponent(search)}`;
+      }
+      if (startDate) {
+        url += `&startDate=${startDate}`;
+      }
+      if (endDate) {
+        url += `&endDate=${endDate}`;
+      }
+
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
         setOrders(data.orders || []);
+        setTotalPages(data.pagination?.pages || 1);
+        setTotal(data.pagination?.total || 0);
       }
     } catch (error) {
       toast({
@@ -71,12 +94,48 @@ export default function OrdersPage() {
     }
   };
 
-  const filteredOrders = orders.filter(
-    (order) =>
-      order.orderNumber.toLowerCase().includes(search.toLowerCase()) ||
-      order.customerName.toLowerCase().includes(search.toLowerCase()) ||
-      order.customerEmail.toLowerCase().includes(search.toLowerCase())
-  );
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleClearDates = () => {
+    setStartDate('');
+    setEndDate('');
+  };
+
+  const handleDateValidation = () => {
+    if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
+      toast({
+        title: 'Invalid Date Range',
+        description: 'End date must be after start date',
+        variant: 'destructive',
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setStartDate(e.target.value);
+    if (e.target.value && endDate && new Date(e.target.value) > new Date(endDate)) {
+      toast({
+        title: 'Invalid Date Range',
+        description: 'Start date cannot be after end date',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleEndDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEndDate(e.target.value);
+    if (startDate && e.target.value && new Date(startDate) > new Date(e.target.value)) {
+      toast({
+        title: 'Invalid Date Range',
+        description: 'End date cannot be before start date',
+        variant: 'destructive',
+      });
+    }
+  };
 
   return (
     <div>
@@ -85,36 +144,69 @@ export default function OrdersPage() {
         <p className="mt-2 text-gray-600">Manage and track customer orders</p>
       </div>
 
-      <div className="mb-6 flex gap-4">
-        <div className="flex-1 relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-          <Input
-            type="text"
-            placeholder="Search orders..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="pl-10"
-          />
+      <div className="mb-6 space-y-4">
+        <div className="flex gap-4">
+          <div className="flex-1 relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Input
+              type="text"
+              placeholder="Search orders..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+          <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <SelectTrigger className="w-48">
+              <SelectValue placeholder="Filter by status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Statuses</SelectItem>
+              <SelectItem value="pending">Pending</SelectItem>
+              <SelectItem value="confirmed">Confirmed</SelectItem>
+              <SelectItem value="preparing">Preparing</SelectItem>
+              <SelectItem value="ready">Ready</SelectItem>
+              <SelectItem value="delivered">Delivered</SelectItem>
+              <SelectItem value="cancelled">Cancelled</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-        <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-48">
-            <SelectValue placeholder="Filter by status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Statuses</SelectItem>
-            <SelectItem value="pending">Pending</SelectItem>
-            <SelectItem value="confirmed">Confirmed</SelectItem>
-            <SelectItem value="preparing">Preparing</SelectItem>
-            <SelectItem value="ready">Ready</SelectItem>
-            <SelectItem value="delivered">Delivered</SelectItem>
-            <SelectItem value="cancelled">Cancelled</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="flex gap-4 items-center">
+          <div className="flex gap-2 items-center">
+            <label className="text-sm text-gray-700 whitespace-nowrap">From Date:</label>
+            <Input
+              type="date"
+              value={startDate}
+              onChange={handleStartDateChange}
+              className="w-40"
+            />
+          </div>
+          <div className="flex gap-2 items-center">
+            <label className="text-sm text-gray-700 whitespace-nowrap">To Date:</label>
+            <Input
+              type="date"
+              value={endDate}
+              onChange={handleEndDateChange}
+              className="w-40"
+            />
+          </div>
+          {(startDate || endDate) && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleClearDates}
+              className="flex items-center gap-1"
+            >
+              <X className="h-4 w-4" />
+              Clear Dates
+            </Button>
+          )}
+        </div>
       </div>
 
       {loading ? (
         <div className="text-center py-12">Loading orders...</div>
-      ) : filteredOrders.length === 0 ? (
+      ) : orders.length === 0 ? (
         <div className="text-center py-12 bg-white rounded-lg border">
           <p className="text-gray-600">No orders found</p>
         </div>
@@ -147,7 +239,7 @@ export default function OrdersPage() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredOrders.map((order) => (
+              {orders.map((order) => (
                 <tr key={order._id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {order.orderNumber}
@@ -184,6 +276,13 @@ export default function OrdersPage() {
               ))}
             </tbody>
           </table>
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            totalItems={total}
+            itemsPerPage={limit}
+            onPageChange={handlePageChange}
+          />
         </div>
       )}
     </div>

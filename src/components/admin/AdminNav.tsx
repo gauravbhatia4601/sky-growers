@@ -11,9 +11,9 @@ export default function AdminNav() {
 
   const navItems = [
     { href: '/admin/dashboard', label: 'Dashboard', icon: BarChart3 },
-    { href: '/admin/products', label: 'Products', icon: Package },
+    // { href: '/admin/products', label: 'Products', icon: Package },
     { href: '/admin/orders', label: 'Orders', icon: ShoppingCart },
-    { href: '/admin/inventory', label: 'Inventory', icon: Box },
+    // { href: '/admin/inventory', label: 'Inventory', icon: Box },
   ];
 
   const isActive = (href: string) => pathname === href || pathname?.startsWith(`${href}/`);

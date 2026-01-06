@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -12,6 +13,7 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { OrderStatus, IOrderItem } from '@/lib/db/models/Order';
+import { Printer, Save } from 'lucide-react';
 
 interface Order {
   _id: string;
@@ -48,6 +50,9 @@ export default function OrderDetailPage() {
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState<OrderStatus>('pending');
   const [isUpdating, setIsUpdating] = useState(false);
+  const [editingPrices, setEditingPrices] = useState(false);
+  const [itemPrices, setItemPrices] = useState<{ unitPrice: number; subtotal: number }[]>([]);
+  const [isSavingPrices, setIsSavingPrices] = useState(false);
 
   useEffect(() => {
     fetchOrder();
@@ -60,6 +65,16 @@ export default function OrderDetailPage() {
         const data = await response.json();
         setOrder(data);
         setStatus(data.status);
+        // Initialize item prices
+        setItemPrices(
+          data.items.map((item: IOrderItem) => ({
+            unitPrice: item.unitPrice,
+            subtotal: item.subtotal,
+          }))
+        );
+        // Check if order needs price editing (has items with 0 price)
+        const needsPricing = data.items.some((item: IOrderItem) => item.unitPrice === 0);
+        setEditingPrices(needsPricing);
       } else {
         toast({
           title: 'Error',
@@ -112,6 +127,63 @@ export default function OrderDetailPage() {
     }
   };
 
+  const handlePriceChange = (index: number, field: 'unitPrice' | 'subtotal', value: string) => {
+    const numValue = parseFloat(value) || 0;
+    const updated = [...itemPrices];
+    updated[index] = { ...updated[index], [field]: numValue };
+    
+    // Auto-calculate subtotal if unit price changes
+    if (field === 'unitPrice' && order) {
+      updated[index].subtotal = numValue * order.items[index].quantity;
+    }
+    
+    setItemPrices(updated);
+  };
+
+  const handleSavePrices = async () => {
+    if (!order) return;
+
+    try {
+      setIsSavingPrices(true);
+      const response = await fetch(`/api/admin/orders/${params.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: itemPrices,
+          totalAmount: itemPrices.reduce((sum, item) => sum + item.subtotal, 0),
+        }),
+      });
+
+      if (response.ok) {
+        toast({
+          title: 'Success',
+          description: 'Order prices updated successfully',
+        });
+        setEditingPrices(false);
+        fetchOrder();
+      } else {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to update prices');
+      }
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to update order prices',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSavingPrices(false);
+    }
+  };
+
+  const calculateTotal = () => {
+    return itemPrices.reduce((sum, item) => sum + item.subtotal, 0);
+  };
+
+  const hasUnpricedItems = order?.items.some((item) => item.unitPrice === 0) || false;
+
   if (loading) {
     return <div className="text-center py-12">Loading...</div>;
   }
@@ -122,9 +194,17 @@ export default function OrderDetailPage() {
 
   return (
     <div>
-      <div className="mb-8">
+      <div className="mb-8 flex justify-between items-center">
         <Button variant="outline" onClick={() => router.back()}>
           ← Back to Orders
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => window.open(`/admin/orders/${params.id}/print`, '_blank')}
+          className="flex items-center gap-2"
+        >
+          <Printer className="h-4 w-4" />
+          Print Order
         </Button>
       </div>
 
@@ -151,7 +231,7 @@ export default function OrderDetailPage() {
               </SelectContent>
             </Select>
             {status !== order.status && (
-              <Button onClick={handleStatusUpdate} disabled={isUpdating}>
+              <Button className="text-gray-900 border-1 hover:bg-gray-900 hover:text-white" onClick={handleStatusUpdate} disabled={isUpdating}>
                 {isUpdating ? 'Updating...' : 'Update Status'}
               </Button>
             )}
@@ -162,17 +242,17 @@ export default function OrderDetailPage() {
           <div>
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Customer Information</h2>
             <div className="space-y-2 text-sm">
-              <p>
+              <p className="text-gray-900">
                 <span className="font-medium">Name:</span> {order.customerName}
               </p>
-              <p>
+              <p className="text-gray-900">
                 <span className="font-medium">Email:</span> {order.customerEmail}
               </p>
-              <p>
+              <p className="text-gray-900">
                 <span className="font-medium">Phone:</span> {order.customerPhone}
               </p>
               {order.businessName && (
-                <p>
+                <p className="text-gray-900">
                   <span className="font-medium">Business:</span> {order.businessName}
                 </p>
               )}
@@ -182,10 +262,10 @@ export default function OrderDetailPage() {
           <div>
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Order Details</h2>
             <div className="space-y-2 text-sm">
-              <p>
+              <p className="text-gray-900">
                 <span className="font-medium">Type:</span> {order.orderType.replace('-', ' ')}
               </p>
-              <p>
+              <p className="text-gray-900">
                 <span className="font-medium">Status:</span>{' '}
                 <span
                   className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusColors[order.status]}`}
@@ -194,12 +274,12 @@ export default function OrderDetailPage() {
                 </span>
               </p>
               {order.deliveryAddress && (
-                <p>
+                <p className="text-gray-900">
                   <span className="font-medium">Delivery Address:</span> {order.deliveryAddress}
                 </p>
               )}
               {order.deliveryDate && (
-                <p>
+                <p className="text-gray-900">
                   <span className="font-medium">Delivery Date:</span>{' '}
                   {new Date(order.deliveryDate).toLocaleDateString()}
                 </p>
@@ -209,7 +289,51 @@ export default function OrderDetailPage() {
         </div>
 
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Order Items</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">Order Items</h2>
+            {hasUnpricedItems && !editingPrices && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setEditingPrices(true)}
+                className="flex items-center gap-2"
+              >
+                <Save className="h-4 w-4" />
+                Set Prices
+              </Button>
+            )}
+            {editingPrices && (
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setEditingPrices(false);
+                    // Reset prices to original
+                    if (order) {
+                      setItemPrices(
+                        order.items.map((item: IOrderItem) => ({
+                          unitPrice: item.unitPrice,
+                          subtotal: item.subtotal,
+                        }))
+                      );
+                    }
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={handleSavePrices}
+                  disabled={isSavingPrices}
+                  className="flex items-center gap-2 text-gray-900 border-1"
+                >
+                  <Save className="h-4 w-4" />
+                  {isSavingPrices ? 'Saving...' : 'Save Prices'}
+                </Button>
+              </div>
+            )}
+          </div>
           <div className="border rounded-lg overflow-hidden">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -237,11 +361,36 @@ export default function OrderDetailPage() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {item.quantity} {item.unit}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      ${item.unitPrice.toFixed(2)}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      {editingPrices ? (
+                        <div className="flex items-center gap-1">
+                          <span className="text-gray-500">$</span>
+                          <Input
+                            type="number"
+                            step="0.01"
+                            min="0"
+                            value={itemPrices[index]?.unitPrice || 0}
+                            onChange={(e) => handlePriceChange(index, 'unitPrice', e.target.value)}
+                            className="w-24 h-8"
+                            placeholder="0.00"
+                          />
+                        </div>
+                      ) : (
+                        <span className="text-gray-500">
+                          {item.unitPrice > 0 ? `$${item.unitPrice.toFixed(2)}` : 'TBD'}
+                        </span>
+                      )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">
-                      ${item.subtotal.toFixed(2)}
+                      {editingPrices ? (
+                        <span className="font-medium">
+                          ${(itemPrices[index]?.subtotal || 0).toFixed(2)}
+                        </span>
+                      ) : (
+                        <span>
+                          {item.subtotal > 0 ? `$${item.subtotal.toFixed(2)}` : 'TBD'}
+                        </span>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -252,7 +401,11 @@ export default function OrderDetailPage() {
                     Total:
                   </td>
                   <td className="px-6 py-4 text-right text-sm font-bold text-gray-900">
-                    ${order.totalAmount.toFixed(2)}
+                    {editingPrices
+                      ? `$${calculateTotal().toFixed(2)}`
+                      : order.totalAmount > 0
+                      ? `$${order.totalAmount.toFixed(2)}`
+                      : 'To be confirmed'}
                   </td>
                 </tr>
               </tfoot>

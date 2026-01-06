@@ -9,6 +9,10 @@ export interface IProduct extends Document {
   unit: 'kg' | 'lbs' | 'piece';
   isAvailable: boolean;
   season?: string;
+  isNew: boolean;
+  isPopular: boolean;
+  isDeleted?: boolean;
+  deletedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -53,6 +57,25 @@ const ProductSchema: Schema = new Schema(
     season: {
       type: String,
       trim: true,
+    },
+    isNew: {
+      type: Boolean,
+      default: false,
+      index: true,
+    },
+    isPopular: {
+      type: Boolean,
+      default: false,
+      index: true,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+      index: true,
+    },
+    deletedAt: {
+      type: Date,
+      default: null,
     },
   },
   {

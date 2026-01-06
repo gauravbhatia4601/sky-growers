@@ -1,4 +1,5 @@
-import { Order, OrderStatus } from '@/lib/db/models/Order';
+import Order from '@/lib/db/models/Order';
+import { OrderStatus } from '@/lib/db/models/Order';
 import { AnalyticsData } from '@/types';
 
 export async function calculateAnalytics(
@@ -33,6 +34,9 @@ export async function calculateAnalytics(
 
   orders.forEach((order) => {
     order.items.forEach((item) => {
+      // Skip items without productId (contact form inquiries)
+      if (!item.productId) return;
+      
       const productId = item.productId.toString();
       const existing = productMap.get(productId) || { name: item.productName, quantity: 0, revenue: 0 };
       existing.quantity += item.quantity;

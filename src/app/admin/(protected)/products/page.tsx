@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Plus, Edit, Trash2, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { Pagination } from '@/components/ui/pagination';
 
 interface Product {
   _id: string;
@@ -17,25 +18,33 @@ interface Product {
   unit: string;
   isAvailable: boolean;
   season?: string;
+  isDeleted?: boolean;
 }
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+  const [limit] = useState(20);
+  const [totalPages, setTotalPages] = useState(1);
+  const [total, setTotal] = useState(0);
   const { toast } = useToast();
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [page, search]);
 
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/admin/products');
+      const url = `/api/admin/products?page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}`;
+      const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
         setProducts(data.products || []);
+        setTotalPages(data.pagination?.pages || 1);
+        setTotal(data.pagination?.total || 0);
       }
     } catch (error) {
       toast({
@@ -74,10 +83,9 @@ export default function ProductsPage() {
     }
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(search.toLowerCase()) ||
-    product.category.toLowerCase().includes(search.toLowerCase())
-  );
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
 
   return (
     <div>
@@ -87,7 +95,7 @@ export default function ProductsPage() {
           <p className="mt-2 text-gray-600">Manage your product catalog</p>
         </div>
         <Link href="/admin/products/new">
-          <Button>
+          <Button className="text-gray-900 border-1 hover:bg-gray-900 hover:text-white">
             <Plus className="h-4 w-4 mr-2" />
             Add Product
           </Button>
@@ -109,7 +117,7 @@ export default function ProductsPage() {
 
       {loading ? (
         <div className="text-center py-12">Loading products...</div>
-      ) : filteredProducts.length === 0 ? (
+      ) : products.length === 0 ? (
         <div className="text-center py-12 bg-white rounded-lg border">
           <p className="text-gray-600">No products found</p>
           <Link href="/admin/products/new">
@@ -122,16 +130,16 @@ export default function ProductsPage() {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Product
+                  Product Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Category
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Price
+                  Price per Unit
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
+                  Availability
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
@@ -139,7 +147,7 @@ export default function ProductsPage() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredProducts.map((product) => (
+              {products.map((product) => (
                 <tr key={product._id}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
@@ -189,7 +197,7 @@ export default function ProductsPage() {
                         size="sm"
                         onClick={() => handleDelete(product._id)}
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-4 w-4 text-gray-900" />
                       </Button>
                     </div>
                   </td>
@@ -197,6 +205,13 @@ export default function ProductsPage() {
               ))}
             </tbody>
           </table>
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            totalItems={total}
+            itemsPerPage={limit}
+            onPageChange={handlePageChange}
+          />
         </div>
       )}
     </div>

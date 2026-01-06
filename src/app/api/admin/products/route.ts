@@ -18,8 +18,14 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search') || '';
     const category = searchParams.get('category') || '';
     const isAvailable = searchParams.get('isAvailable');
+    const includeDeleted = searchParams.get('includeDeleted') === 'true';
 
     const query: any = {};
+
+    // Always exclude deleted products unless explicitly requested
+    if (!includeDeleted) {
+      query.isDeleted = { $ne: true };
+    }
 
     if (search) {
       query.$or = [
@@ -78,7 +84,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Validation failed', details: error.errors },
+        { error: 'Validation failed', details: error.issues },
         { status: 400 }
       );
     }

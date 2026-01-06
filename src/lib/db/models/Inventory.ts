@@ -58,10 +58,9 @@ InventorySchema.virtual('isLowStock').get(function (this: IInventory) {
 });
 
 // Pre-save hook to calculate available quantity
-InventorySchema.pre('save', function (next) {
+InventorySchema.pre('save', function (this: IInventory) {
   this.availableQuantity = Math.max(0, this.quantity - this.reservedQuantity);
   this.lastUpdated = new Date();
-  next();
 });
 
 const Inventory: Model<IInventory> = mongoose.models.Inventory || mongoose.model<IInventory>('Inventory', InventorySchema);

@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
+import { PRODUCT_CATEGORIES, PRODUCT_SEASONS } from '@/lib/product.config';
 
 interface Product {
   _id?: string;
@@ -24,6 +25,8 @@ interface Product {
   unit: 'kg' | 'lbs' | 'piece';
   isAvailable: boolean;
   season?: string;
+  isNew?: boolean;
+  isPopular?: boolean;
 }
 
 interface ProductFormProps {
@@ -43,6 +46,8 @@ export default function ProductForm({ product }: ProductFormProps) {
     unit: 'kg',
     isAvailable: true,
     season: '',
+    isNew: false,
+    isPopular: false,
   });
 
   useEffect(() => {
@@ -56,6 +61,8 @@ export default function ProductForm({ product }: ProductFormProps) {
         unit: product.unit || 'kg',
         isAvailable: product.isAvailable ?? true,
         season: product.season || '',
+        isNew: product.isNew ?? false,
+        isPopular: product.isPopular ?? false,
       });
     }
   }, [product]);
@@ -119,13 +126,22 @@ export default function ProductForm({ product }: ProductFormProps) {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Category *
           </label>
-          <Input
-            type="text"
+          <Select
             value={formData.category}
-            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+            onValueChange={(value) => setFormData({ ...formData, category: value })}
             required
-            placeholder="e.g., Vegetables, Herbs"
-          />
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select category" />
+            </SelectTrigger>
+            <SelectContent>
+              {PRODUCT_CATEGORIES.map((category) => (
+                <SelectItem key={category} value={category}>
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
@@ -182,12 +198,22 @@ export default function ProductForm({ product }: ProductFormProps) {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Season
           </label>
-          <Input
-            type="text"
-            value={formData.season}
-            onChange={(e) => setFormData({ ...formData, season: e.target.value })}
-            placeholder="e.g., Year-round, Summer"
-          />
+          <Select
+            value={formData.season || ''}
+            onValueChange={(value) => setFormData({ ...formData, season: value || undefined })}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select season (optional)" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="none">None</SelectItem>
+              {PRODUCT_SEASONS.map((season) => (
+                <SelectItem key={season} value={season}>
+                  {season}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
@@ -203,30 +229,52 @@ export default function ProductForm({ product }: ProductFormProps) {
         />
       </div>
 
-      <div className="flex items-center">
-        <input
-          type="checkbox"
-          id="isAvailable"
-          checked={formData.isAvailable}
-          onChange={(e) => setFormData({ ...formData, isAvailable: e.target.checked })}
-          className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
-        />
-        <label htmlFor="isAvailable" className="ml-2 block text-sm text-gray-900">
-          Product is available for sale
-        </label>
+      <div className="space-y-3">
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            id="isAvailable"
+            checked={formData.isAvailable}
+            onChange={(e) => setFormData({ ...formData, isAvailable: e.target.checked })}
+            className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+          />
+          <label htmlFor="isAvailable" className="ml-2 block text-sm text-gray-900">
+            Product is available for sale
+          </label>
+        </div>
+
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            id="isNew"
+            checked={formData.isNew}
+            onChange={(e) => setFormData({ ...formData, isNew: e.target.checked })}
+            className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+          />
+          <label htmlFor="isNew" className="ml-2 block text-sm text-gray-900">
+            Mark as New Product
+          </label>
+        </div>
+
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            id="isPopular"
+            checked={formData.isPopular}
+            onChange={(e) => setFormData({ ...formData, isPopular: e.target.checked })}
+            className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+          />
+          <label htmlFor="isPopular" className="ml-2 block text-sm text-gray-900">
+            Mark as Most Popular
+          </label>
+        </div>
       </div>
 
-      <div className="flex gap-4">
-        <Button type="submit" disabled={isSubmitting}>
+      <div className="flex gap-4 justify-end">
+        <Button type="submit" disabled={isSubmitting} className='text-gray-900 border-1 hover:bg-gray-900 hover:text-white'>
           {isSubmitting ? 'Saving...' : product?._id ? 'Update Product' : 'Create Product'}
         </Button>
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => router.push('/admin/products')}
-        >
-          Cancel
-        </Button>
+        
       </div>
     </form>
   );
