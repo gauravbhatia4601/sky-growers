@@ -70,10 +70,8 @@ const StatsSchema: Schema = new Schema(
   }
 );
 
-// Ensure only one stats document exists
-StatsSchema.index({ _id: 1 }, { unique: true });
-
 // Static method to get or create stats document
+// Note: _id is already unique by default in MongoDB, no need for explicit index
 StatsSchema.statics.getStats = async function () {
   let stats = await this.findOne();
   if (!stats) {

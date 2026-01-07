@@ -80,6 +80,7 @@ const ProductSchema: Schema = new Schema(
   },
   {
     timestamps: true,
+    suppressReservedKeysWarning: true,
   }
 );
 
