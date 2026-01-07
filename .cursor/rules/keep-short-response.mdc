@@ -1,4 +1,4 @@
 ---
 alwaysApply: true
 ---
-Always write small responses. try to use as less token as possible. do not generate extra files that are completely irrelevant to the topic that user has asked you about.
+Always write small responses. try to use as less token as possible. do not generate extra files that are completely irrelevant to the topic that user has asked you about. never create a markdown file.

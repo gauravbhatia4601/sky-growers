@@ -14,6 +14,7 @@ import {
   containsSpamPatterns,
 } from '@/lib/utils/security';
 import { updateStatsOnOrderCreate } from '@/lib/utils/stats';
+import { enqueueOrderPlaced } from '@/lib/email/queue';
 import { z } from 'zod';
 
 function generateOrderNumber(): string {
@@ -228,6 +229,14 @@ export async function POST(request: NextRequest) {
 
     // Update stats when order is created
     await updateStatsOnOrderCreate(totalAmount);
+
+    // Enqueue email notifications (async, non-blocking)
+    try {
+      await enqueueOrderPlaced(order);
+    } catch (emailError) {
+      // Log but don't fail the order creation
+      console.error('Failed to enqueue order emails:', emailError);
+    }
 
     return NextResponse.json(
       { order, message: 'Order created successfully' },

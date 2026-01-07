@@ -75,7 +75,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 SKY GROWERS. All rights reserved. | 
+            © {new Date().getFullYear()} SKY GROWERS. All rights reserved. | 
             <Link href="/terms" className="text-green-400 hover:text-green-300 ml-1">
               Terms & Conditions
             </Link>

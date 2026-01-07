@@ -25,7 +25,7 @@ export default function AdminNav() {
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/admin/dashboard" className="text-xl font-bold text-green-600">
-                Sky Growers Admin
+                Sky Growers
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">

@@ -39,27 +39,6 @@ export const viewport: Viewport = {
   ],
 };
 
-const familyMembers = [
-  {
-    name: "Upkar Singh Bhatti",
-    role: "Farm Owner & Agricultural Specialist",
-    bio: "Leading our family's agricultural vision with expertise in sustainable farming and premium vegetable cultivation.",
-    image: "photo-1472396961693-142e6e269027"
-  },
-  {
-    name: "Maria Bhatti",
-    role: "Operations Manager & Quality Control",
-    bio: "Ensures every vegetable meets our premium standards before reaching customers.",
-    image: "photo-1517022812141-23620dba5c23"
-  },
-  {
-    name: "David Bhatti",
-    role: "Agricultural Innovation Lead",
-    bio: "Combines traditional farming wisdom with modern sustainable agriculture practices.",
-    image: "photo-1465379944081-7f47de8d74ac"
-  }
-];
-
 const certifications = [
   // "USDA Regenerative Certified",
   "Sustainable Agriculture Practices",

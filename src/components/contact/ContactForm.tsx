@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, X } from "lucide-react";
+import Link from "next/link";
 
 interface VegetableItem {
   name: string;
@@ -31,6 +32,7 @@ export default function ContactForm() {
   ]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const addVegetableField = () => {
     setVegetables([...vegetables, { name: "", quantity: "", unit: "lbs" }]);
@@ -106,6 +108,7 @@ export default function ContactForm() {
         description:
           "Thank you for your interest. We'll contact you within 24 hours to confirm your order details.",
       });
+      setSubmitted(true);
       setFormData({
         name: "",
         email: "",
@@ -144,7 +147,19 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <>
+      {submitted && (
+        <div className="mb-6 rounded-lg bg-green-50 border border-green-200 p-6 text-center">
+          <h2 className="text-2xl font-semibold text-green-700">
+          Thank you!   
+          </h2>
+          <p className="mt-2 text-green-700">
+            We’ve received your order request. We’ll contact you within 24 hours to confirm your order details.
+          </p>
+        </div>
+      )}
+      {!submitted && (
+        <form onSubmit={handleSubmit} className="space-y-6">
       {/* Honeypot field for bot detection - hidden from users */}
       <input
         type="text"
@@ -166,6 +181,7 @@ export default function ContactForm() {
             onChange={handleInputChange}
             required
             className="w-full"
+            placeholder="John Doe"
           />
         </div>
         <div>
@@ -178,6 +194,7 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleInputChange}
             required
+            placeholder="john.doe@example.com"
             className="w-full"
           />
         </div>
@@ -195,11 +212,12 @@ export default function ContactForm() {
             onChange={handleInputChange}
             required
             className="w-full"
+            placeholder="+64 27 730 0400"
           />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Business/Organization
+            Business/Organization Name *
           </label>
           <Input
             type="text"
@@ -207,6 +225,7 @@ export default function ContactForm() {
             value={formData.business}
             onChange={handleInputChange}
             className="w-full"
+            placeholder="Your Business/Organization Name"
           />
         </div>
       </div>
@@ -223,12 +242,12 @@ export default function ContactForm() {
             <SelectValue placeholder="Select order type" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="bulk-wholesale">Bulk Wholesale (50+ lbs)</SelectItem>
-            <SelectItem value="restaurant">Restaurant Supply</SelectItem>
-            <SelectItem value="grocery">Grocery Store</SelectItem>
-            <SelectItem value="individual">Individual/Family Order</SelectItem>
-            <SelectItem value="catering">Catering/Events</SelectItem>
-            <SelectItem value="csa">CSA Box Subscription</SelectItem>
+            <SelectItem value="bulk-wholesale" className="text-black hover:bg-green-600 hover:text-white">Bulk Wholesale (50+ lbs)</SelectItem>
+            <SelectItem value="restaurant" className="text-black hover:bg-green-600 hover:text-white">Restaurant Supply</SelectItem>
+            <SelectItem value="grocery" className="text-black hover:bg-green-600 hover:text-white">Grocery Store</SelectItem>
+            <SelectItem value="individual" className="text-black hover:bg-green-600 hover:text-white">Individual/Family Order</SelectItem>
+            <SelectItem value="catering" className="text-black hover:bg-green-600 hover:text-white">Catering/Events</SelectItem>
+            <SelectItem value="csa" className="text-black hover:bg-green-600 hover:text-white">CSA Box Subscription</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -271,11 +290,11 @@ export default function ContactForm() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="lbs">lbs</SelectItem>
-                    <SelectItem value="kg">kg</SelectItem>
-                    <SelectItem value="piece">piece</SelectItem>
-                    <SelectItem value="bunch">bunch</SelectItem>
-                    <SelectItem value="box">box</SelectItem>
+                    <SelectItem value="lbs" className="text-black hover:bg-green-600 hover:text-white">lbs</SelectItem>
+                    <SelectItem value="kg" className="text-black hover:bg-green-600 hover:text-white">kg</SelectItem>
+                    <SelectItem value="piece" className="text-black hover:bg-green-600 hover:text-white">piece</SelectItem>
+                    <SelectItem value="bunch" className="text-black hover:bg-green-600 hover:text-white">bunch</SelectItem>
+                    <SelectItem value="box" className="text-black hover:bg-green-600 hover:text-white">box</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -286,9 +305,9 @@ export default function ContactForm() {
                     variant="outline"
                     size="icon"
                     onClick={() => removeVegetableField(index)}
-                    className="w-full"
+                    className="w-full bg-red-600 text-white"
                   >
-                    <X className="h-4 w-4" />
+                    <X className="h-4 w-4 bg-red-600 text-white" />
                   </Button>
                 )}
               </div>
@@ -298,9 +317,9 @@ export default function ContactForm() {
             type="button"
             variant="outline"
             onClick={addVegetableField}
-            className="w-full"
+            className="w-full bg-green-600 text-white"
           >
-            <Plus className="h-4 w-4 mr-2" />
+            <Plus className="h-4 w-4 mr-2 bg-green-600 text-white" />
             Add Another Vegetable
           </Button>
         </div>
@@ -319,6 +338,9 @@ export default function ContactForm() {
           rows={4}
         />
       </div>
+      <p className="text-sm text-gray-500">
+        By submitting this form, you agree to our <Link href="/privacy-policy" className="text-green-600 hover:text-green-700">Privacy Policy</Link> and <Link href="/terms-of-service" className="text-green-600 hover:text-green-700">Terms of Service</Link>.
+      </p>
 
       <Button 
         type="submit" 
@@ -328,6 +350,8 @@ export default function ContactForm() {
         {isSubmitting ? "Submitting..." : "Submit Order Inquiry"}
       </Button>
     </form>
+      )}
+    </>
   );
 }
 

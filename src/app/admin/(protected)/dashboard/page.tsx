@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import AnalyticsDashboard from '@/components/admin/AnalyticsDashboard';
 import Link from 'next/link';
-import { Package, ShoppingCart, Box, TrendingUp } from 'lucide-react';
+import { ShoppingCart, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface Stats {

@@ -5,6 +5,7 @@ import { requireAuth } from '@/lib/auth/middleware';
 import { isValidObjectId } from '@/lib/utils/security';
 import { handleOrderStatusChange } from '@/lib/utils/orders';
 import { updateStatsOnStatusChange } from '@/lib/utils/stats';
+import { enqueueOrderStatus } from '@/lib/email/queue';
 import { z } from 'zod';
 
 const updateStatusSchema = z.object({
@@ -46,6 +47,13 @@ export async function PATCH(
       
       // Update stats when order status changes
       await updateStatsOnStatusChange(oldStatus, status, order.totalAmount);
+      
+      // Enqueue status notification email (async, non-blocking)
+      try {
+        await enqueueOrderStatus(order, status);
+      } catch (emailError) {
+        console.error('Failed to enqueue status email:', emailError);
+      }
     }
 
     return NextResponse.json(order.toObject());

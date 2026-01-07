@@ -161,16 +161,16 @@ export default function OrdersPage() {
               <SelectValue placeholder="Filter by status" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Statuses</SelectItem>
-              <SelectItem value="pending">Pending</SelectItem>
-              <SelectItem value="confirmed">Confirmed</SelectItem>
-              <SelectItem value="preparing">Preparing</SelectItem>
-              <SelectItem value="ready">Ready</SelectItem>
-              <SelectItem value="delivered">Delivered</SelectItem>
-              <SelectItem value="cancelled">Cancelled</SelectItem>
+              <SelectItem value="all" className="text-black hover:bg-green-600 hover:text-white">All Statuses</SelectItem>
+              <SelectItem value="pending" className="text-black hover:bg-green-600 hover:text-white">Pending</SelectItem>
+              <SelectItem value="confirmed" className="text-black hover:bg-green-600 hover:text-white">Confirmed</SelectItem>
+              <SelectItem value="preparing" className="text-black hover:bg-green-600 hover:text-white">Preparing</SelectItem>
+              <SelectItem value="ready" className="text-black hover:bg-green-600 hover:text-white">Ready</SelectItem>
+              <SelectItem value="delivered" className="text-black hover:bg-green-600 hover:text-white">Delivered</SelectItem>
+              <SelectItem value="cancelled" className="text-black hover:bg-green-600 hover:text-white">Cancelled</SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        
         <div className="flex gap-4 items-center">
           <div className="flex gap-2 items-center">
             <label className="text-sm text-gray-700 whitespace-nowrap">From Date:</label>
@@ -201,6 +201,7 @@ export default function OrdersPage() {
               Clear Dates
             </Button>
           )}
+        </div>
         </div>
       </div>
 

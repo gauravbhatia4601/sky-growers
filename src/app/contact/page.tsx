@@ -189,7 +189,7 @@ export default function Contact() {
           </div>
           {/* Order Form */}
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Order Inquiry Form</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Order Inquiry</h2>
             <ContactForm />
             <div className="mt-8 p-4 bg-blue-50 rounded-lg">
               <h3 className="font-semibold text-gray-900 mb-2">What Happens Next?</h3>

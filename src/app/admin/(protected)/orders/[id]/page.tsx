@@ -222,12 +222,12 @@ export default function OrderDetailPage() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="pending">Pending</SelectItem>
-                <SelectItem value="confirmed">Confirmed</SelectItem>
-                <SelectItem value="preparing">Preparing</SelectItem>
-                <SelectItem value="ready">Ready</SelectItem>
-                <SelectItem value="delivered">Delivered</SelectItem>
-                <SelectItem value="cancelled">Cancelled</SelectItem>
+                <SelectItem value="pending" className="text-black hover:bg-green-600 hover:text-white">Pending</SelectItem>
+                <SelectItem value="confirmed" className="text-black hover:bg-green-600 hover:text-white">Confirmed</SelectItem>
+                <SelectItem value="preparing" className="text-black hover:bg-green-600 hover:text-white">Preparing</SelectItem>
+                <SelectItem value="ready" className="text-black hover:bg-green-600 hover:text-white">Ready</SelectItem>
+                <SelectItem value="delivered" className="text-black hover:bg-green-600 hover:text-white">Delivered</SelectItem>
+                <SelectItem value="cancelled" className="text-black hover:bg-green-600 hover:text-white">Cancelled</SelectItem>
               </SelectContent>
             </Select>
             {status !== order.status && (

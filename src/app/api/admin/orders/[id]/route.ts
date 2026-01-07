@@ -6,6 +6,7 @@ import { updateOrderSchema } from '@/lib/validations/order';
 import { isValidObjectId } from '@/lib/utils/security';
 import { handleOrderStatusChange } from '@/lib/utils/orders';
 import { updateStatsOnStatusChange, updateStatsOnRevenueChange } from '@/lib/utils/stats';
+import { enqueueOrderStatus } from '@/lib/email/queue';
 import { z } from 'zod';
 import { OrderStatus } from '@/lib/db/models/Order';
 
@@ -121,6 +122,13 @@ export async function PUT(
     // Update stats for status change
     if (validatedData.status && validatedData.status !== oldStatus) {
       await updateStatsOnStatusChange(oldStatus, validatedData.status, order.totalAmount);
+      
+      // Enqueue status notification email (async, non-blocking)
+      try {
+        await enqueueOrderStatus(order, validatedData.status);
+      } catch (emailError) {
+        console.error('Failed to enqueue status email:', emailError);
+      }
     }
 
     // Update stats for revenue change (when prices are updated)

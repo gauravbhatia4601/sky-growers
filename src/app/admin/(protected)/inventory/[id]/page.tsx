@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import InventoryForm from '@/components/admin/InventoryForm';
 import { useToast } from '@/hooks/use-toast';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
 interface Product {

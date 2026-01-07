@@ -221,12 +221,12 @@ export default function Home() {
             >
               Get Wholesale Pricing
             </Link>
-            <Link
+            {/* <Link
               href="/contact"
               className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-green-600 px-8 py-4 rounded-lg text-lg font-semibold transition-colors"
             >
               Schedule Farm Visit
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>
