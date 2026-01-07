@@ -57,6 +57,9 @@ RUN npm run build
 # ============================================
 FROM base AS runner
 
+# Install curl for cron jobs
+RUN apk add --no-cache curl
+
 # Set production environment
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
