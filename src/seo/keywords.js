@@ -1,8 +1,103 @@
-// 100 High-Impact SEO Keywords for Sky Growers NZ
-// Only includes produce already mentioned on site pages
+// SEO Keywords for SKY GROWERS (NZ)
+// Combines base keywords with dynamic generation for ~350+ keywords
 
-const KEYWORDS = [
-  // Brand + Location (10)
+// Produce already on site pages
+const vegetables = [
+  "vegetables",
+  "produce",
+  "greens",
+  "coriander",
+  "cilantro",
+  "spinach",
+  "radish",
+  "lettuce",
+  "kale",
+  "silverbeet",
+  "rocket",
+  "arugula",
+  "spring onions",
+  "parsley",
+  "mint",
+  "basil",
+  "microgreens",
+  "salad mix",
+  "leafy greens",
+  "root vegetables",
+  "herbs",
+  "seasonal produce",
+  "fresh produce",
+  "local produce",
+  "pumpkin",
+  "butternut",
+  "cucumber",
+];
+
+const modifiers = [
+  "natural",
+  "farm fresh",
+  "fresh",
+  "locally grown",
+  "local",
+  "regeneratively grown",
+  "regenerative",
+  "sustainably grown",
+  "sustainable",
+  "eco-friendly",
+  "seasonal",
+  "in-season",
+  "artisanal",
+  "premium",
+  "wholesale",
+  "bulk",
+  "restaurant supply",
+  "grocery supply",
+  "farm to table",
+  "farm-to-table",
+  "direct from farm",
+  "delivery",
+  "home delivery",
+  "same-day",
+  "next-day",
+  "best",
+  "top quality",
+  "high quality",
+  "year-round",
+  "seasonal availability",
+];
+
+const intents = [
+  "buy",
+  "order",
+  "shop",
+  "supplier",
+  "wholesale supplier",
+  "bulk supplier",
+  "distributor",
+  "delivery",
+  "near me",
+  "price",
+  "prices",
+  "cost",
+  "quote",
+  "wholesale pricing",
+  "CSA",
+  "subscription",
+  "farm box",
+  "market",
+];
+
+const locations = [
+  "New Zealand",
+  "NZ",
+  "Aotearoa",
+  "Christchurch",
+  "Canterbury",
+  "South Island",
+  "Canterbury region",
+];
+
+// 100 High-Impact Base Keywords
+const base = [
   "Sky Growers Christchurch",
   "Sky Growers Canterbury",
   "Sky Growers New Zealand",
@@ -13,8 +108,6 @@ const KEYWORDS = [
   "Sky Growers vegetables",
   "Sky Growers produce",
   "Bhatti family farm Christchurch",
-
-  // Core Location Keywords (15)
   "vegetable farm Christchurch",
   "fresh produce Christchurch",
   "farm fresh vegetables Canterbury",
@@ -30,8 +123,6 @@ const KEYWORDS = [
   "farm to table Christchurch",
   "farm to fork Canterbury",
   "local growers Christchurch",
-
-  // B2B / Wholesale (15)
   "wholesale vegetable supplier NZ",
   "bulk vegetables Christchurch",
   "restaurant vegetable supplier Canterbury",
@@ -47,8 +138,6 @@ const KEYWORDS = [
   "supermarket vegetable supplier NZ",
   "wholesale greens NZ",
   "bulk farm produce Canterbury",
-
-  // Produce-Specific (using only existing items) (15)
   "fresh coriander Christchurch",
   "coriander supplier NZ",
   "spring onion farm NZ",
@@ -64,8 +153,6 @@ const KEYWORDS = [
   "salad mix Christchurch",
   "fresh produce supplier Canterbury",
   "seasonal vegetables NZ",
-
-  // Sustainability Keywords (10)
   "sustainable farm NZ",
   "regenerative farming Christchurch",
   "eco friendly vegetables NZ",
@@ -76,8 +163,6 @@ const KEYWORDS = [
   "regenerative agriculture Canterbury",
   "environmentally friendly farm NZ",
   "sustainable vegetable grower NZ",
-
-  // Farming & Quality (10)
   "premium vegetables NZ",
   "high quality produce Canterbury",
   "artisanal vegetables Christchurch",
@@ -88,8 +173,6 @@ const KEYWORDS = [
   "quality assured produce NZ",
   "GAP certified farm NZ",
   "food safety certified vegetables NZ",
-
-  // Delivery & Service (10)
   "vegetable delivery NZ",
   "produce home delivery Christchurch",
   "next day vegetable delivery Canterbury",
@@ -100,8 +183,6 @@ const KEYWORDS = [
   "direct farm delivery NZ",
   "vegetable box Christchurch",
   "farm fresh delivery Canterbury",
-
-  // Intent Keywords (10)
   "buy vegetables online NZ",
   "order fresh produce Christchurch",
   "vegetable prices NZ",
@@ -112,13 +193,57 @@ const KEYWORDS = [
   "fresh produce online order",
   "vegetables for restaurants NZ",
   "commercial produce order Canterbury",
-
-  // Long-tail Location (5)
   "vegetable grower South Island NZ",
   "Canterbury region vegetable farm",
   "local produce Canterbury NZ",
   "Christchurch area farm vegetables",
   "New Zealand South Island farm produce",
 ];
+
+function titleCase(str) {
+  return str
+    .split(" ")
+    .map((w) => (w.length > 2 ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(" ");
+}
+
+const combined = new Set();
+
+// Add base first
+base.forEach((k) => combined.add(k));
+
+// Generate combinations: [modifier] [veg] [location]
+for (const m of modifiers) {
+  for (const v of vegetables) {
+    for (const loc of locations) {
+      combined.add(`${m} ${v} ${loc}`);
+      combined.add(`${titleCase(m)} ${titleCase(v)} ${loc}`);
+    }
+  }
+}
+
+// Generate combinations: [intent] [veg] [location]
+for (const i of intents) {
+  for (const v of vegetables) {
+    for (const loc of locations) {
+      combined.add(`${i} ${v} ${loc}`);
+      combined.add(`${titleCase(i)} ${titleCase(v)} ${loc}`);
+    }
+  }
+}
+
+// Generate combinations: [modifier] [intent] [veg] [location]
+for (const m of modifiers) {
+  for (const i of intents) {
+    for (const v of vegetables) {
+      for (const loc of locations) {
+        combined.add(`${m} ${i} ${v} ${loc}`);
+      }
+    }
+  }
+}
+
+// Limit to ~400 keywords
+const KEYWORDS = Array.from(combined).slice(0, 400);
 
 export { KEYWORDS };
