@@ -1,5 +1,6 @@
 // SEO Keywords for SKY GROWERS (NZ)
-// Combines base keywords with dynamic generation for ~350+ keywords
+// 200+ base keywords + dynamic generation for 500+ total keywords
+// Updated: Jan 2026 with trending NZ search terms
 
 // Produce already on site pages
 const vegetables = [
@@ -63,6 +64,9 @@ const modifiers = [
   "high quality",
   "year-round",
   "seasonal availability",
+  "organic",
+  "chemical free",
+  "spray free",
 ];
 
 const intents = [
@@ -84,6 +88,9 @@ const intents = [
   "subscription",
   "farm box",
   "market",
+  "find",
+  "get",
+  "purchase",
 ];
 
 const locations = [
@@ -94,10 +101,17 @@ const locations = [
   "Canterbury",
   "South Island",
   "Canterbury region",
+  "Riccarton",
+  "Fendalton",
+  "Merivale",
+  "Rangiora",
+  "Rolleston",
+  "Lincoln",
+  "Selwyn",
 ];
 
-// 100 High-Impact Base Keywords
-const base = [
+// 100 Original High-Impact Keywords
+const baseOriginal = [
   "Sky Growers Christchurch",
   "Sky Growers Canterbury",
   "Sky Growers New Zealand",
@@ -200,6 +214,122 @@ const base = [
   "New Zealand South Island farm produce",
 ];
 
+// 100 NEW Trending NZ Keywords (2026)
+const baseTrending = [
+  // Organic & Sustainable (trending in NZ)
+  "organic produce delivery NZ",
+  "organic food suppliers Christchurch",
+  "local farmers market Canterbury",
+  "wholesale organic produce NZ",
+  "sustainable farming practices NZ",
+  "farm-to-table suppliers Christchurch",
+  "eco-friendly produce NZ",
+  "online produce market NZ",
+  "organic vegetable suppliers Canterbury",
+  "local food producers NZ",
+  // Delivery & Service (high search volume)
+  "farmers market delivery Christchurch",
+  "organic food wholesalers NZ",
+  "fresh produce suppliers Canterbury",
+  "local organic farms NZ",
+  "farm-to-door delivery Christchurch",
+  "online farmers market NZ",
+  "fresh vegetable delivery Christchurch",
+  "organic produce suppliers Canterbury",
+  "local produce markets NZ",
+  "farmers market online Christchurch",
+  // B2B & Commercial
+  "organic food distributors NZ",
+  "sustainable food production NZ",
+  "local organic produce NZ",
+  "farm-to-home delivery Christchurch",
+  "online vegetable market NZ",
+  "fresh produce delivery Canterbury",
+  "organic vegetable suppliers Christchurch",
+  "local food markets NZ",
+  "farmers market delivery Canterbury",
+  "organic food suppliers NZ",
+  // Quality & Premium
+  "sustainable farming NZ",
+  "fresh vegetable suppliers Christchurch",
+  "local organic food NZ",
+  "farm-to-table delivery Canterbury",
+  "eco-friendly food suppliers NZ",
+  "online produce suppliers NZ",
+  "organic vegetable suppliers NZ",
+  "local food suppliers NZ",
+  "farmers market delivery NZ",
+  "organic food markets NZ",
+  // Location-specific (Canterbury suburbs)
+  "sustainable food suppliers NZ",
+  "local organic farms Canterbury",
+  "farm-to-home delivery NZ",
+  "eco-friendly produce suppliers NZ",
+  "online vegetable suppliers NZ",
+  "fresh produce delivery Christchurch",
+  "organic vegetable delivery NZ",
+  "local food markets Canterbury",
+  "farmers market online NZ",
+  "organic food suppliers Canterbury",
+  // Sustainability focus
+  "sustainable farming practices Canterbury",
+  "fresh vegetable suppliers NZ",
+  "local organic food Christchurch",
+  "farm-to-table delivery NZ",
+  "online produce delivery NZ",
+  "organic produce delivery Christchurch",
+  "local produce delivery NZ",
+  "farmers market Christchurch",
+  "organic food delivery Christchurch",
+  "sustainable agriculture practices Christchurch",
+  // Long-tail location keywords
+  "organic produce delivery Riccarton",
+  "fresh produce suppliers Rangiora",
+  "local farm produce Rolleston",
+  "sustainable farms Selwyn",
+  "organic produce markets Lincoln",
+  "vegetable delivery Fendalton",
+  "farm fresh produce Merivale",
+  "local growers Selwyn district",
+  "organic farm Canterbury plains",
+  "fresh vegetables Waimakariri",
+  // Industry-specific
+  "restaurant produce supplier Christchurch",
+  "catering vegetable supply NZ",
+  "hotel kitchen suppliers Canterbury",
+  "cafe fresh produce NZ",
+  "food service delivery Christchurch",
+  "commercial kitchen vegetables NZ",
+  "hospitality food suppliers Canterbury",
+  "bulk catering produce NZ",
+  "restaurant quality vegetables Christchurch",
+  "chef sourced produce NZ",
+  // Modern consumer trends
+  "zero waste produce NZ",
+  "plastic free vegetables Christchurch",
+  "carbon neutral farm NZ",
+  "locally sourced food Canterbury",
+  "paddock to plate NZ",
+  "clean eating vegetables Christchurch",
+  "healthy produce delivery NZ",
+  "nutrient dense vegetables Canterbury",
+  "chemical free produce NZ",
+  "spray free vegetables Christchurch",
+  // Subscription & recurring
+  "weekly veggie box NZ",
+  "produce subscription Christchurch",
+  "farm share Canterbury",
+  "CSA box NZ",
+  "seasonal subscription box Christchurch",
+  "regular vegetable delivery NZ",
+  "recurring produce order Canterbury",
+  "auto-delivery vegetables NZ",
+  "standing order produce Christchurch",
+  "weekly farm delivery Canterbury",
+];
+
+const base = [...baseOriginal, ...baseTrending];
+
 function titleCase(str) {
   return str
     .split(" ")
@@ -243,7 +373,7 @@ for (const m of modifiers) {
   }
 }
 
-// Limit to ~400 keywords
-const KEYWORDS = Array.from(combined).slice(0, 400);
+// Export 500 keywords for comprehensive coverage
+const KEYWORDS = Array.from(combined).slice(0, 500);
 
 export { KEYWORDS };

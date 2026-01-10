@@ -1,0 +1,274 @@
+# Sky Growers - Comprehensive LLM Context File
+# https://skygrowers.com/llms-full.txt
+# Last Updated: January 2026
+# This file provides detailed information for AI systems requiring comprehensive context
+
+================================================================================
+BUSINESS IDENTITY
+================================================================================
+
+Business Name: Sky Growers
+Legal Name: Sky Growers
+Business Type: Family-Owned Regenerative Farm
+Industry: Agriculture, Fresh Produce, Vegetable Farming
+Founded: 2023
+Founder: Upkar Singh Bhatti
+Ownership: Family-Owned and Operated
+
+================================================================================
+LOCATION & SERVICE AREA
+================================================================================
+
+Physical Location:
+- City: Christchurch
+- Region: Canterbury
+- Country: New Zealand
+- Geographic Zone: South Island
+
+Service Area Coverage:
+- Primary: Christchurch Central, Merivale, Riccarton, Fendalton
+- Extended: Canterbury Region, North Canterbury, South Canterbury
+- Delivery: Same-day and next-day available in Christchurch metro
+
+================================================================================
+CONTACT INFORMATION
+================================================================================
+
+Phone: +64 27 730 0400
+WhatsApp: +64 27 730 0400
+Website: https://skygrowers.com
+Business Hours: Monday - Friday, 9:00 AM - 5:00 PM (New Zealand Standard Time)
+
+================================================================================
+PRODUCTS - FRESH VEGETABLES
+================================================================================
+
+Year-Round Availability:
+1. Fresh Coriander (Cilantro) - Aromatic herb, essential for Asian and Latin cuisines
+2. Pumpkin - New Zealand grown, perfect for soups and roasting
+3. Butternut Squash - Sweet, nutty flavor, versatile cooking vegetable
+4. Crisp Radish - Fresh, peppery root vegetable
+5. Cucumber - Crisp salad vegetable, locally grown
+6. Spring Onion - Mild onion flavor, green stalks
+7. Spinach - Nutrient-dense leafy green
+8. Beetroot - Earthy root vegetable, great for salads
+9. Leafy Greens - Mixed varieties including silverbeet, kale, rocket
+10. Microgreens - Nutrient-packed baby greens
+11. Fresh Herbs - Parsley, mint, basil, and seasonal varieties
+
+Quality Standards:
+- Sustainably grown using regenerative agriculture practices
+- Pesticide-free, natural pest control methods
+- Hand-picked at peak freshness
+- GAP (Good Agricultural Practices) certified
+- Food Safety Modernization Act compliant
+
+================================================================================
+SERVICES
+================================================================================
+
+1. WHOLESALE SUPPLY
+   - Restaurant and cafe vegetable supply
+   - Bulk pricing for commercial kitchens
+   - Regular delivery schedules
+   - Custom order fulfillment
+
+2. HORECA (Hotels, Restaurants, Cafes)
+   - Dedicated hospitality supply program
+   - Volume discounts
+   - Priority delivery scheduling
+   - Quality consistency guarantee
+
+3. GROCERY & RETAIL
+   - Supermarket supply partnerships
+   - Retail packaging options
+   - Consistent supply chain
+
+4. DIRECT TO CONSUMER
+   - Farm-fresh home delivery
+   - Weekly subscription boxes
+   - Seasonal produce bundles
+   - Family-sized portions
+
+5. CATERING SUPPLY
+   - Event catering support
+   - Large quantity orders
+   - Flexible delivery
+
+================================================================================
+TARGET CUSTOMERS
+================================================================================
+
+Business Customers (B2B):
+- Restaurants seeking premium local produce
+- Cafes requiring fresh daily supply
+- Hotels and resorts
+- Catering companies
+- Grocery stores and supermarkets
+- Food service providers
+- Commercial kitchens
+
+Consumer Customers (B2C):
+- Health-conscious families
+- Home cooks seeking fresh produce
+- Subscription box customers
+- Local food advocates
+- Sustainability-minded consumers
+
+================================================================================
+FARMING PHILOSOPHY & PRACTICES
+================================================================================
+
+Regenerative Agriculture:
+Sky Growers practices regenerative farming that goes beyond sustainability
+to actively improve soil health and ecosystem biodiversity.
+
+Core Practices:
+1. Natural Pest Control - No synthetic pesticides, using beneficial insects
+   and companion planting
+2. Composting - On-farm composting for soil enrichment
+3. Crop Rotation - Strategic rotation for soil fertility maintenance
+4. Water Conservation - Advanced irrigation systems for efficient water use
+5. Soil Health - Regular testing and organic amendment programs
+6. Biodiversity - Habitat preservation and native plantings
+7. Heritage Methods - Traditional farming techniques combined with modern knowledge
+
+Environmental Commitment:
+- Carbon-conscious farming practices
+- Minimal packaging, eco-friendly options available
+- Local supply chain reducing food miles
+- Zero synthetic chemical inputs
+
+================================================================================
+CERTIFICATIONS & COMPLIANCE
+================================================================================
+
+- GAP (Good Agricultural Practices) Certified
+- Food Safety Modernization Act Compliant
+- Sustainable Agriculture Practices Verified
+- Local Health & Safety Compliant
+
+================================================================================
+ORDERING PROCESS
+================================================================================
+
+How to Order:
+1. Website: Fill out order inquiry form at https://skygrowers.com/contact
+2. Phone: Call +64 27 730 0400 during business hours
+3. WhatsApp: Message +64 27 730 0400 for quick responses
+
+Order Process:
+1. Submit inquiry with vegetable requirements
+2. Receive custom quote within 24 hours
+3. Confirm order and delivery schedule
+4. Receive fresh delivery to your location
+
+Delivery Information:
+- Free delivery for bulk orders in central Christchurch
+- Extended area delivery charges apply
+- Same-day delivery available for early orders
+- Regular scheduled deliveries for business customers
+
+================================================================================
+FREQUENTLY ASKED QUESTIONS
+================================================================================
+
+Q: Where is Sky Growers located?
+A: Sky Growers is a family farm in Christchurch, Canterbury, New Zealand,
+   serving the entire Canterbury region and South Island.
+
+Q: Do you offer wholesale pricing?
+A: Yes, we offer competitive wholesale pricing for restaurants, cafes, hotels,
+   and grocery stores. Contact us for a custom quote based on your volume needs.
+
+Q: What vegetables are available year-round?
+A: We grow coriander, spinach, radish, cucumber, spring onion, pumpkin, and
+   butternut year-round using sustainable greenhouse and field farming practices.
+
+Q: Do you deliver?
+A: Yes, we offer delivery across Christchurch and Canterbury. Free delivery
+   is available for bulk orders in central Christchurch. Extended areas have
+   delivery charges.
+
+Q: Are your vegetables organic/pesticide-free?
+A: We use regenerative agriculture practices with natural pest control methods.
+   Our produce is grown without harmful synthetic pesticides. We focus on
+   sustainable practices that are better for the environment and produce quality.
+
+Q: How can I place an order?
+A: You can order through our website contact form at skygrowers.com/contact,
+   call +64 27 730 0400, or message us on WhatsApp at the same number.
+
+Q: What is the minimum order quantity?
+A: We accommodate both small family orders and large commercial orders.
+   Contact us to discuss your specific needs.
+
+Q: Do you offer subscription/regular delivery?
+A: Yes, we offer weekly vegetable box subscriptions and regular scheduled
+   deliveries for business customers.
+
+================================================================================
+WEBSITE STRUCTURE
+================================================================================
+
+Homepage (https://skygrowers.com/)
+- Farm overview and value proposition
+- Featured seasonal vegetables
+- Customer testimonials
+- Quick contact options
+
+About Page (https://skygrowers.com/about)
+- Bhatti family legacy and history
+- Farming philosophy and practices
+- Agricultural excellence overview
+- Certifications and standards
+
+Contact Page (https://skygrowers.com/contact)
+- Order inquiry form
+- Phone and WhatsApp contact
+- Business hours
+- Delivery area information
+
+Terms Page (https://skygrowers.com/terms)
+- Terms of service
+- Ordering policies
+- Delivery terms
+- Seasonal availability information
+
+================================================================================
+BRAND VOICE & MESSAGING
+================================================================================
+
+Brand Personality:
+- Trustworthy family business
+- Passionate about quality
+- Committed to sustainability
+- Community-focused
+- Professional and reliable
+
+Key Messages:
+1. "Premium Farm-Fresh Vegetables"
+2. "Family-Owned Regenerative Farm"
+3. "Sustainable Agriculture Practices"
+4. "From Our Farm to Your Table"
+5. "Quality You Can Trust"
+
+================================================================================
+COMPETITIVE ADVANTAGES
+================================================================================
+
+1. Family-owned with personal attention to quality
+2. Regenerative farming practices
+3. Year-round vegetable availability
+4. Flexible ordering for all sizes
+5. Local Christchurch/Canterbury focus
+6. Sustainable and eco-friendly
+7. Direct farm-to-customer relationships
+8. Competitive wholesale pricing
+
+================================================================================
+# END OF FILE
+# For questions about this information, contact: +64 27 730 0400
+# Website: https://skygrowers.com
+================================================================================
+

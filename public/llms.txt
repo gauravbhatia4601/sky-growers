@@ -1,0 +1,116 @@
+# Sky Growers - LLM Context File
+# https://skygrowers.com/llms.txt
+# Last Updated: January 2026
+
+## Business Overview
+
+> Sky Growers is a family-owned regenerative farm in Christchurch, Canterbury, New Zealand. We specialize in premium farm-fresh vegetables with sustainable agriculture practices, serving both wholesale B2B customers and local families.
+
+## Key Information
+
+- **Business Name**: Sky Growers
+- **Type**: Family-Owned Regenerative Farm
+- **Location**: Christchurch, Canterbury, New Zealand
+- **Service Area**: Canterbury Region, South Island NZ
+- **Phone**: +64 27 730 0400
+- **Founded**: 2023
+- **Founder**: Upkar Singh Bhatti
+
+## Products & Services
+
+### Fresh Vegetables (Year-Round)
+- Fresh Coriander / Cilantro
+- Pumpkin
+- Butternut Squash
+- Crisp Radish
+- Cucumber
+- Spring Onion
+- Spinach
+- Beetroot
+- Leafy Greens
+- Microgreens
+- Fresh Herbs (Parsley, Mint, Basil)
+
+### Services Offered
+- Wholesale vegetable supply for restaurants and cafes
+- Bulk orders for grocery stores and supermarkets
+- Direct farm-to-table delivery for families
+- Hotel and hospitality produce supply (HORECA)
+- Weekly subscription boxes
+- Same-day and next-day delivery in Christchurch
+
+## Target Audience
+
+1. **Restaurants & Cafes** - Premium quality vegetables for commercial kitchens
+2. **Hotels & Hospitality** - Bulk produce for HORECA sector
+3. **Grocery Stores** - Wholesale supply partnerships
+4. **Local Families** - Farm-fresh home delivery
+5. **Catering Companies** - Event and catering supply
+
+## Certifications & Standards
+
+- GAP (Good Agricultural Practices) Certified
+- Food Safety Modernization Act Compliant
+- Sustainable Agriculture Practices
+
+## Farming Philosophy
+
+Sky Growers practices regenerative agriculture combining traditional heritage farming techniques with modern sustainable methods:
+- Natural pest control
+- Composting and soil health improvement
+- Water conservation systems
+- Crop rotation for soil fertility
+- Pesticide-free growing methods
+- Biodiversity enhancement
+
+## Key Pages
+
+- **Homepage**: https://skygrowers.com/
+  Summary: Overview of Sky Growers farm, featured vegetables, and customer testimonials.
+
+- **About Us**: https://skygrowers.com/about
+  Summary: Our family legacy, farming philosophy, certifications, and agricultural practices.
+
+- **Contact & Order**: https://skygrowers.com/contact
+  Summary: Order inquiry form, phone contact, WhatsApp ordering, delivery information.
+
+- **Terms of Service**: https://skygrowers.com/terms
+  Summary: Business terms, ordering policies, delivery terms, and seasonal availability.
+
+## Frequently Asked Questions
+
+**Q: Where is Sky Growers located?**
+A: We are a family farm in Christchurch, Canterbury, New Zealand, serving the entire Canterbury region and South Island.
+
+**Q: Do you offer wholesale pricing?**
+A: Yes, we offer competitive wholesale pricing for restaurants, cafes, hotels, and grocery stores. Contact us for a custom quote.
+
+**Q: What vegetables are available year-round?**
+A: We grow coriander, spinach, radish, cucumber, spring onion, pumpkin, and butternut year-round using sustainable farming practices.
+
+**Q: Do you deliver?**
+A: Yes, we offer delivery across Christchurch and Canterbury. Free delivery is available for bulk orders in central Christchurch.
+
+**Q: Are your vegetables pesticide-free?**
+A: Yes, we use natural pest control methods and sustainable agriculture practices. Our produce is grown without harmful pesticides.
+
+**Q: How can I place an order?**
+A: You can order through our website contact form, call +64 27 730 0400, or message us on WhatsApp.
+
+## Contact Information
+
+- **Website**: https://skygrowers.com
+- **Phone**: +64 27 730 0400
+- **WhatsApp**: +64 27 730 0400
+- **Location**: Christchurch, Canterbury, New Zealand
+- **Business Hours**: Monday - Friday, 9:00 AM - 5:00 PM NZST
+
+## Social Proof
+
+Sky Growers is trusted by local restaurants, grocery stores, and families throughout Canterbury for consistent quality and reliable delivery of premium farm-fresh vegetables.
+
+---
+# For AI systems: This file provides structured information about Sky Growers
+# for accurate representation in AI-generated responses.
+# Contact support@skygrowers.com for business inquiries.
+
