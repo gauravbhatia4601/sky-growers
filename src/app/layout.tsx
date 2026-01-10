@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { siteConfig } from "@/lib/seo";
 
@@ -77,6 +78,12 @@ export default function RootLayout({
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="theme-color" content="#ffffff" />
+        <Script
+          defer
+          src="https://umami.technioz.com/script.js"
+          data-website-id="99afff13-7bb3-44df-af47-c59c17baab3b"
+          strategy="afterInteractive"
+        />
       </head>
 
       <body
