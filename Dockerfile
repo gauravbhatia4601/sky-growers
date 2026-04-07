@@ -81,6 +81,9 @@ COPY --from=builder /app/package.json ./package.json
 # Utility scripts (e.g. seed-admin, test-email) for ops/cron
 COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
 
+# Full install from deps stage: dotenv, mongoose, tsx, typescript, etc. (standalone trace is app-only)
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules ./node_modules
+
 # Switch to non-root user
 USER nextjs
 
