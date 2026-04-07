@@ -78,6 +78,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # Copy package.json (needed for standalone mode)
 COPY --from=builder /app/package.json ./package.json
 
+# Utility scripts (e.g. seed-admin, test-email) for ops/cron
+COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
+
 # Switch to non-root user
 USER nextjs
 
